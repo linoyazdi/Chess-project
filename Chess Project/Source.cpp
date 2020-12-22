@@ -1,1 +1,1 @@
-int s = 9;
+int blosad = 0;
