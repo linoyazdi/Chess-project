@@ -5,24 +5,21 @@
 class Player
 {
 private:
-	std::string color;
-	unsigned deadPieces;
+	unsigned color;
 	unsigned overallScore;
-	bool onCheck;
+	bool inCheck;
 
 public:
 	// getters
-	std::string getColor() const;
-	unsigned getDeadPieces() const;
+	unsigned getColor() const;
 	unsigned getOverallScore() const;
-	bool isOnCheck() const;
+	bool isInCheck() const;
 
 	// setters
-	void setColor(std::string color);
-	void incDeadPieces();
+	void setColor(unsigned color);
 	void incOverallScore(unsigned value);
-	void setIsOnCheck(bool flag);
+	void setIsInCheck(bool flag);
 
-	Player(std::string color);
+	Player(unsigned color);
 	~Player() = default;
 };
