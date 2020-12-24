@@ -3,8 +3,9 @@
 #include <string>
 #include <vector>
 #include "Piece.h"
+#include "King.h"
 
-typedef std::vector<std::vector<Piece>> boardMatrix;
+typedef std::vector<std::vector<Piece*>> boardMatrix;
 
 class Board
 {
@@ -14,8 +15,8 @@ private:
 public:
 	Board(boardMatrix board);
 	Board();
-	~Board() = default;
-
+	~Board();
+	void init();
 	boardMatrix getBoard() const;
 	void setBoard(boardMatrix newBoard) const;
 

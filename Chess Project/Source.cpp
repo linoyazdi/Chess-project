@@ -1,2 +1,9 @@
-#include <string>
-int blosad = 0;
+#include "Game.h"
+
+int main()
+{
+	Game game;
+	game.giveState();
+	system("pause");
+	return 0;
+}
