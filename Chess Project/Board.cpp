@@ -1,5 +1,7 @@
 #include "Board.h"
-#define BOARD_SIZE 8
+
+unsigned Board::BOARD_SIZE = 8;
+
 Board::Board(boardMatrix board)
 {
 }
@@ -8,7 +10,8 @@ Board::Board()
 {
 }
 
-Board::~Board() {
+Board::~Board() 
+{
 	for (unsigned i = 0; i < BOARD_SIZE; i++) {
 		for (unsigned j = 0; j < BOARD_SIZE; j++) {
 			if (board[i][j]) {
@@ -46,7 +49,8 @@ std::ostream& operator<<(std::ostream& os, Board& board)
 	return os;
 }
 
-void Board::init() {
+void Board::init() 
+{
 	for (unsigned i = 0; i < BOARD_SIZE; i++) {
 		board.push_back(std::vector<Piece*>());
 		for (unsigned j = 0; j < BOARD_SIZE; j++) {
@@ -54,10 +58,12 @@ void Board::init() {
 			//std::cout << "Added a piece";
 		}
 	}
-	board[3][0] = new King("white");
+	board[3][0] = new King(0);
+	board[4][0] = new King(1);
 }
 
-std::string Board::getString() const {
+std::string Board::getString() const 
+{
 	std::string str = "";
 	for (unsigned i = 0; i < BOARD_SIZE; i++) {
 		for (unsigned j = 0; j < BOARD_SIZE; j++) {
@@ -72,11 +78,26 @@ std::string Board::getString() const {
 	return str;
 }
 
-void Board::move(std::string from, std::string to) {
-	string  fixedPosition = Piece::braekPosition(from);
+void Board::move(std::string from, std::string to, unsigned turn) 
+{
+	string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';
 	unsigned y = fixedPosition[1] - '0';
-	if (board[y][x]) {
-		board[y][x]->move(board, from, to);
+
+	if (board[y][x]) 
+	{
+		if (board[y][x]->getColor() == turn)
+		{
+			board[y][x]->move(board, from, to);
+		}
+		else
+		{
+			// TODO: raise excaption
+		}
+	}
+
+	else
+	{
+		// TODO: raise excaption
 	}
 }

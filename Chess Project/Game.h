@@ -7,7 +7,7 @@ class Game
 private:
 	Player player1;
 	Player player2;
-	bool turn;
+	unsigned turn;
 	Board board;
 public:
 	Game();
