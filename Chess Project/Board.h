@@ -19,6 +19,7 @@ public:
 	void init();
 	boardMatrix getBoard() const;
 	void setBoard(boardMatrix newBoard) const;
-
+	std::string getString() const;
+	void move(std::string from, std::string to);
 	friend std::ostream& operator<<(std::ostream& os, Board& board);
 };

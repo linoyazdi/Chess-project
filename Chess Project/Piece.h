@@ -1,14 +1,22 @@
 #pragma once
 #include <iostream>
+#include <vector>
 #include <string>
+
+class Piece;
+typedef std::vector<std::vector<Piece*>> boardMatrix;
+using std::string;
 
 class Piece
 {
 protected:
 	char symbol;
-	std::string color;
+	string color;
 public:
 	virtual char getSymbol() const;
-	Piece(std::string color, char symbol);
+	virtual void move(boardMatrix& boardState, string from, string to) = 0;
+	Piece(string color, char symbol);
+	static string braekPosition(string position);
 	virtual ~Piece() = default;
 };
+

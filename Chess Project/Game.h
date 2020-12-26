@@ -12,4 +12,6 @@ public:
 	Game();
 	~Game();
 	void giveState();
+	std::string giveBoardString() const;
+	void move(string move);
 };
