@@ -30,7 +30,7 @@ void Game::move(string move) {
 	from[0] = move[0];
 	from[1] = move[1];
 	string to = "00";
-	to[0] = move[3];
-	to[1] = move[4];
+	to[0] = move[2];
+	to[1] = move[3];
 	board.move(from, to);
 }
