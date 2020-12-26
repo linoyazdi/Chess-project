@@ -56,3 +56,27 @@ void Board::init() {
 	}
 	board[3][0] = new King("white");
 }
+
+std::string Board::getString() const {
+	std::string str = "";
+	for (unsigned i = 0; i < BOARD_SIZE; i++) {
+		for (unsigned j = 0; j < BOARD_SIZE; j++) {
+			if (board[i][j]) {
+				str += board[i][j]->getSymbol();
+			}
+			else {
+				str += '#';
+			}
+		}
+	}
+	return str;
+}
+
+void Board::move(std::string from, std::string to) {
+	string  fixedPosition = Piece::braekPosition(from);
+	unsigned x = fixedPosition[0] - '0';
+	unsigned y = fixedPosition[1] - '0';
+	if (board[y][x]) {
+		board[y][x]->move(board, from, to);
+	}
+}
