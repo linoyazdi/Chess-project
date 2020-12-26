@@ -1,6 +1,6 @@
 #include "Piece.h"
 
-Piece::Piece(std::string color, char symbol) : symbol(symbol), color(color) {
+Piece::Piece(unsigned color, char symbol) : symbol(symbol), color(color) {
 
 }
 
@@ -8,7 +8,7 @@ char Piece::getSymbol() const {
 	return symbol;
 }
 
-string Piece::braekPosition(string position) {
+string Piece::breakPosition(string position) {
 	string newPosition = "00";
 	switch (position[0])
 	{
@@ -41,7 +41,14 @@ string Piece::braekPosition(string position) {
 		break;
 	}
 
-	newPosition[1] = char((int)position[1] - 1);
+	int chValue = char((int)position[1] - 1) - '0';
+	newPosition[1] = char(7 - chValue + '0');
 
 	return newPosition;
 }
+
+unsigned Piece::getColor() const
+{
+	return this->color;
+}
+
