@@ -54,6 +54,9 @@
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameException.cpp">
+      <Filter>Source Files\Exception files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h">
@@ -87,15 +90,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameException.h">
-      <Filter>Header Files\Exception headers</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveException.h">
-      <Filter>Header Files\Exception headers</Filter>
-    </ClInclude>
-    <ClInclude Include="NoPieceToMove.h">
-      <Filter>Header Files\Exception headers</Filter>
-    </ClInclude>
-    <ClInclude Include="CausingSelfCheck.h">
       <Filter>Header Files\Exception headers</Filter>
     </ClInclude>
   </ItemGroup>
