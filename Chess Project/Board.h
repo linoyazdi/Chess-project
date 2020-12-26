@@ -4,6 +4,7 @@
 #include <vector>
 #include "Piece.h"
 #include "King.h"
+#include "Rook.h"
 
 typedef std::vector<std::vector<Piece*>> boardMatrix;
 
