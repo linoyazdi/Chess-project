@@ -80,20 +80,37 @@ void Rook::move(boardMatrix& boardState, string from, string to, bool checkMove)
 
 				else
 				{
-					delete boardState[yTo][xTo]; // deleting ("eating") the other piece
-					boardState[yTo][xTo] = this; // moving the king
-					boardState[y][x] = nullptr; // emptying the old place
+					if (!checkMove) 
+					{
+						delete boardState[yTo][xTo]; // deleting ("eating") the other piece
+						boardState[yTo][xTo] = this; // moving the king
+						boardState[y][x] = nullptr; // emptying the old place
+					}
+
+					else 
+					{
+						throw Check();
+					}
 				}
 			}
 
 			else
 			{
-				boardState[yTo][xTo] = this; // moving the king
-				boardState[y][x] = nullptr; // emptying the old place
+				if (!checkMove) 
+				{
+					boardState[yTo][xTo] = this; // moving the king
+					boardState[y][x] = nullptr; // emptying the old place
+				}
+				
+				else
+				{
+					throw Check();
+				}
 			}
 		}
 
 	}
+
 }
 
 Rook::Rook(unsigned color) : Piece(color, color == 0 ? 'R' : 'r')

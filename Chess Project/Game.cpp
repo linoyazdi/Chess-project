@@ -21,7 +21,7 @@ void Game::giveState()
 }
 
 std::string Game::giveBoardString() const {
-	char turn_char = turn ? '0' : '1';
+	char turn_char = turn == 0? '0' : '1';
 	std::string str = board.getString() + turn_char + '0';
 	return str;
 }
@@ -33,26 +33,48 @@ int Game::move(string move) {
 	string to = "00";
 	to[0] = move[3];
 	to[1] = move[4];
+	
+	
 	try {
 		board.move(from, to, turn);
 	}
+	
+	catch (Check) {
+		if (turn == 0) {
+			player1.setIsInCheck(true);
+		}
+		else {
+			player2.setIsInCheck(true);
+		}
+		return 1;
+	}
+
 	catch (NoPieceToMove) {
 		return 2;
 	}
+
 	catch (PieceAtDestPlace) {
 		return 3;
 	}
+
 	catch (CausingSelfCheck) {
 		return 4;
 	}
+
 	catch (InvalidIndex) {
 		return 5;
 	}
+
 	catch (InvalidMoveToPiece) {
 		return 6;
 	}
+
 	catch (SamePlace) {
 		return 7;
+	}
+
+	catch (...) {
+		std::cout << "unkown exception!!!";
 	}
 	// TODO: handle excaptions
 	turn = turn == 0 ? 1 : 0;
