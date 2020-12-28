@@ -4,11 +4,13 @@ Piece::Piece(unsigned color, char symbol) : symbol(symbol), color(color) {
 
 }
 
+
 char Piece::getSymbol() const {
 	return symbol;
 }
 
-string Piece::breakPosition(string position) {
+
+string Piece::breakPosition(const string& position) {
 	string newPosition = "00";
 	switch (position[0])
 	{
@@ -48,7 +50,7 @@ string Piece::breakPosition(string position) {
 }
 
 
-static string createPosition(int x, int y) {
+string Piece::createPosition(int x, int y) {
 	string newPosition = "00";
 	switch (x)
 	{
@@ -81,8 +83,8 @@ static string createPosition(int x, int y) {
 		break;
 	}
 
-	int chValue = y + 1;
-	newPosition[1] = char(chValue);
+	int chValue = char(y);
+	newPosition[1] = char(1 + chValue + '0');
 
 	return newPosition;
 }

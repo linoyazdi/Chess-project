@@ -46,6 +46,7 @@ int Game::move(string move) {
 		else {
 			player2.setIsInCheck(true);
 		}
+		turn = turn == 0 ? 1 : 0;
 		return 1;
 	}
 

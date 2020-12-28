@@ -59,7 +59,7 @@ void Board::init()
 		}
 	}
 	board[3][0] = new King(0);
-	board[4][0] = new King(1);
+	board[5][0] = new King(1);
 	board[7][7] = new Rook(0);
 }
 
@@ -88,7 +88,7 @@ void Board::move(std::string from, std::string to, unsigned turn)
 	unsigned xTo = positionTo[0] - '0';
 	unsigned yTo = positionTo[1] - '0';
 
-	unsigned size = board.size();
+	size_t size = board.size();
 	
 	//checking good from index
 	if (x < 0 || x >= size || y < 0 || y >= size) {
@@ -107,7 +107,14 @@ void Board::move(std::string from, std::string to, unsigned turn)
 		if (board[y][x]->getColor() == turn)
 		{
 			board[y][x]->move(board, from, to, false);
-			board[y][x]->move(board, to, , true);
+
+			//getting the new location in x, y
+			string fixed = Piece::breakPosition(to);
+			unsigned newX = fixed[0] - '0';
+			unsigned newY = fixed[1] - '0';
+			String kingPos = turn == 0 ? Piece::createPosition(Player::blackX, Player::blackY) : Piece::createPosition(Player::whiteX, Player::whiteY);
+
+			board[newY][newX]->move(board, to, kingPos, true);
 		}
 		else
 		{

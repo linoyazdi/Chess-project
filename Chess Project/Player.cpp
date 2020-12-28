@@ -1,6 +1,13 @@
 #include "Player.h"
 
 
+
+unsigned Player::blackX = 0;
+unsigned Player::whiteX = 0;
+unsigned Player::blackY = 2;
+unsigned Player::whiteY = 4;
+
+
 /*
 This function returns the color of the player
 input: none
@@ -78,3 +85,5 @@ Player::Player(unsigned color)
     this->inCheck = false;
     this->overallScore = 0;
 }
+
+

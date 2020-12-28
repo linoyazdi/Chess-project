@@ -1,6 +1,6 @@
 #include "Rook.h"
 
-void Rook::move(boardMatrix& boardState, string from, string to, bool checkMove)
+void Rook::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';
@@ -19,11 +19,13 @@ void Rook::move(boardMatrix& boardState, string from, string to, bool checkMove)
 	{
 		if (x > xTo)
 		{
-			for (unsigned i = x; i > xTo; i--)
+			for (unsigned i = x-1; i > xTo; i--)
 			{
 				if (boardState[yTo][i])
 				{
-					throw PieceAtDestPlace();
+					if (!checkMove) {
+						throw PieceAtDestPlace();
+					}
 					flag = false;
 				}
 			}
@@ -31,12 +33,14 @@ void Rook::move(boardMatrix& boardState, string from, string to, bool checkMove)
 
 		else if (x < xTo)
 		{
-			for (unsigned i = x; i < xTo; i++)
+			for (unsigned i = x+1; i < xTo; i++)
 			{
 				if (boardState[yTo][i])
 				{
-					throw PieceAtDestPlace();
-					std::cout << "blocked!";
+					if (!checkMove) {
+						throw PieceAtDestPlace();
+						std::cout << "blocked!";
+					}
 					flag = false;
 				}
 			}
@@ -48,8 +52,10 @@ void Rook::move(boardMatrix& boardState, string from, string to, bool checkMove)
 			{
 				if (boardState[i][xTo])
 				{
-					throw PieceAtDestPlace();
-					std::cout << "blocked!";
+					if (!checkMove) {
+						throw PieceAtDestPlace();
+						std::cout << "blocked!";
+					}
 					flag = false;
 				}
 			}
@@ -61,8 +67,10 @@ void Rook::move(boardMatrix& boardState, string from, string to, bool checkMove)
 			{
 				if (boardState[i][xTo])
 				{
-					throw PieceAtDestPlace();
-					std::cout << "blocked!";
+					if (!checkMove) {
+						throw PieceAtDestPlace();
+						std::cout << "blocked!";
+					}
 					flag = false;
 				}
 			}
@@ -74,8 +82,10 @@ void Rook::move(boardMatrix& boardState, string from, string to, bool checkMove)
 			{
 				if (boardState[yTo][xTo]->getColor() == this->color)
 				{
-					std::cout << "can't move!";
-					throw PieceAtDestPlace();
+					if (!checkMove) {
+						std::cout << "can't move!";
+						throw PieceAtDestPlace();
+					}
 				}
 
 				else
