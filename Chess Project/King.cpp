@@ -5,7 +5,7 @@ King::King(unsigned color) : Piece(color, color == 0 ? 'K' : 'k'){
 }
 
 
-void King::move(boardMatrix& boardState, string from, string to)
+void King::move(boardMatrix& boardState, string from, string to, bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';

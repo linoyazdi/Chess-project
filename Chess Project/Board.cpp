@@ -89,7 +89,7 @@ void Board::move(std::string from, std::string to, unsigned turn)
 	{
 		if (board[y][x]->getColor() == turn)
 		{
-			board[y][x]->move(board, from, to);
+			board[y][x]->move(board, from, to, false);
 		}
 		else
 		{

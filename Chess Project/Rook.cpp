@@ -1,6 +1,6 @@
 #include "Rook.h"
 
-void Rook::move(boardMatrix& boardState, string from, string to)
+void Rook::move(boardMatrix& boardState, string from, string to, bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';

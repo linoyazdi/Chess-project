@@ -22,4 +22,9 @@ public:
 
 	Player(unsigned color);
 	~Player() = default;
+
+	static unsigned whiteX;
+	static unsigned whiteY;
+	static unsigned blackX;
+	static unsigned blackY;
 };
