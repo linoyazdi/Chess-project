@@ -29,3 +29,8 @@ const char* InvalidIndex::what() const
 {
 	return "This is an invalid index!\n";
 }
+
+const char* Check::what() const
+{
+	return "There is a check goin on!\n";
+}

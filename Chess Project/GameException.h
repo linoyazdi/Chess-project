@@ -58,3 +58,9 @@ class InvalidIndex : protected MoveException
 public:
 	virtual const char* what() const override;
 };
+
+class Check : protected GameException
+{
+public:
+	virtual const char* what() const override;
+};
