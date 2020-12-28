@@ -98,7 +98,7 @@ void Board::move(std::string from, std::string to, unsigned turn)
 		}
 		else
 		{
-			throw 
+			throw NoPieceToMove();
 		}
 	}
 
