@@ -5,7 +5,7 @@ King::King(unsigned color) : Piece(color, color == 0 ? 'K' : 'k'){
 }
 
 
-void King::move(boardMatrix& boardState, string from, string to, bool checkMove)
+void King::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';
@@ -23,8 +23,10 @@ void King::move(boardMatrix& boardState, string from, string to, bool checkMove)
 		{
 			if (boardState[yTo][xTo]->getColor() == this->color) // if player from the same color
 			{
-				throw PieceAtDestPlace();
-				std::cout << "can't move!";
+				if (!checkMove) {
+					throw PieceAtDestPlace();
+					std::cout << "can't move!";
+				}
 			}
 			else
 			{

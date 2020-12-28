@@ -1,10 +1,12 @@
 #pragma once
 #include "Piece.h"
 
+using String = std::string;
+
 class Rook : public Piece
 {
 public:
-	virtual void move(boardMatrix& boardState, string from, string to, bool checkMove) override;
-	Rook(unsigned color);
+	void move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove) override;
+	Rook(const unsigned color);
 	~Rook() = default;
 };
