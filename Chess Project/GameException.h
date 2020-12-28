@@ -25,7 +25,7 @@ public:
 };
 
 
-class NoPieceToMOve : protected MoveException
+class NoPieceToMove : protected MoveException
 {
 public:
 	virtual const char* what() const override;

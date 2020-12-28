@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include "GameException.h"
 
 class Piece;
 typedef std::vector<std::vector<Piece*>> boardMatrix;

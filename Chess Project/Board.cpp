@@ -84,6 +84,11 @@ void Board::move(std::string from, std::string to, unsigned turn)
 	string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';
 	unsigned y = fixedPosition[1] - '0';
+	unsigned size = board.size();
+
+	if (x < 0 || x >= size || y < 0 || y >= size) {
+		throw InvalidIndex();
+	}
 
 	if (board[y][x]) 
 	{
@@ -93,12 +98,12 @@ void Board::move(std::string from, std::string to, unsigned turn)
 		}
 		else
 		{
-			// TODO: raise excaption
+			throw 
 		}
 	}
 
 	else
 	{
-		// TODO: raise excaption
+		throw NoPieceToMove();
 	}
 }

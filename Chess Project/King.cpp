@@ -14,11 +14,16 @@ void King::move(boardMatrix& boardState, string from, string to, bool checkMove)
 	unsigned xTo = fixedPosition[0] - '0';
 	unsigned yTo = fixedPosition[1] - '0';
 
+	if (x == xTo && y == yTo) {
+		throw SamePlace();
+	}
+
 	if ((y == yTo && (x-1 == xTo || x+1 == xTo)) || (x == xTo && (y-1 == yTo || y+1 == yTo)) || (y+1 == yTo && (x-1 == xTo || x+1 == xTo) || (y - 1 == yTo && (x - 1 == xTo || x + 1 == xTo)))) {
 		if (boardState[yTo][xTo]) 
 		{
 			if (boardState[yTo][xTo]->getColor() == this->color) // if player from the same color
 			{
+				throw PieceAtDestPlace();
 				std::cout << "can't move!";
 			}
 			else
@@ -33,5 +38,8 @@ void King::move(boardMatrix& boardState, string from, string to, bool checkMove)
 			boardState[yTo][xTo] = this; // moving the king
 			boardState[y][x] = nullptr; // emptying the old place
 		}
+	}
+	else {
+		throw InvalidIndex();
 	}
 }
