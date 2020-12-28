@@ -5,7 +5,7 @@ const char* CausingSelfCheck::what() const
 	return "If you'll move that way, you'll cause a self check!\n";
 }
 
-const char* NoPieceToMOve::what() const
+const char* NoPieceToMove::what() const
 {
 	return "You are trying to move nothing! there is no piece to move\n";
 }

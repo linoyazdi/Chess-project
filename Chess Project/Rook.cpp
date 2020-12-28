@@ -1,6 +1,6 @@
 #include "Rook.h"
 
-void Rook::move(boardMatrix& boardState, string from, string to)
+void Rook::move(boardMatrix& boardState, string from, string to, bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';
@@ -10,6 +10,11 @@ void Rook::move(boardMatrix& boardState, string from, string to)
 	unsigned yTo = fixedPosition[1] - '0';
 	bool flag = true;
 
+	if (x == xTo && y == yTo) {
+		throw SamePlace();
+	}
+
+
 	if ((x == xTo && y != yTo) || (x != xTo && y == yTo))
 	{
 		if (x > xTo)
@@ -18,7 +23,7 @@ void Rook::move(boardMatrix& boardState, string from, string to)
 			{
 				if (boardState[yTo][i])
 				{
-					// TODO: throw an excaption
+					throw PieceAtDestPlace();
 					flag = false;
 				}
 			}
@@ -30,7 +35,7 @@ void Rook::move(boardMatrix& boardState, string from, string to)
 			{
 				if (boardState[yTo][i])
 				{
-					// TODO: throw an excaption
+					throw PieceAtDestPlace();
 					std::cout << "blocked!";
 					flag = false;
 				}
@@ -43,7 +48,7 @@ void Rook::move(boardMatrix& boardState, string from, string to)
 			{
 				if (boardState[i][xTo])
 				{
-					// TODO: throw an excaption
+					throw PieceAtDestPlace();
 					std::cout << "blocked!";
 					flag = false;
 				}
@@ -56,7 +61,7 @@ void Rook::move(boardMatrix& boardState, string from, string to)
 			{
 				if (boardState[i][xTo])
 				{
-					// TODO: throw an excaption
+					throw PieceAtDestPlace();
 					std::cout << "blocked!";
 					flag = false;
 				}
@@ -70,7 +75,7 @@ void Rook::move(boardMatrix& boardState, string from, string to)
 				if (boardState[yTo][xTo]->getColor() == this->color)
 				{
 					std::cout << "can't move!";
-					// TODO: throw an exaption
+					throw PieceAtDestPlace();
 				}
 
 				else
