@@ -84,21 +84,34 @@ void Board::move(std::string from, std::string to, unsigned turn)
 	string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';
 	unsigned y = fixedPosition[1] - '0';
-	unsigned size = board.size();
+	string positionTo = Piece::breakPosition(to);
+	unsigned xTo = positionTo[0] - '0';
+	unsigned yTo = positionTo[1] - '0';
 
+	unsigned size = board.size();
+	
+	//checking good from index
 	if (x < 0 || x >= size || y < 0 || y >= size) {
 		throw InvalidIndex();
 	}
 
+	//checking good to index
+	if (xTo < 0 || xTo >= size || yTo < 0 || yTo >= size) {
+		throw InvalidIndex();
+	}
+
+	//checking if there's a piece in the location
 	if (board[y][x]) 
 	{
+		//checking if the piece is of the same color as the active player
 		if (board[y][x]->getColor() == turn)
 		{
 			board[y][x]->move(board, from, to, false);
+			board[y][x]->move(board, to, , true);
 		}
 		else
 		{
-			throw 
+			throw NoPieceToMove();
 		}
 	}
 

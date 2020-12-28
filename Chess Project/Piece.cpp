@@ -47,6 +47,47 @@ string Piece::breakPosition(string position) {
 	return newPosition;
 }
 
+
+static string createPosition(int x, int y) {
+	string newPosition = "00";
+	switch (x)
+	{
+	case 0:
+		newPosition[0] = 'a';
+		break;
+	case 1:
+		newPosition[0] = 'b';
+		break;
+	case 2:
+		newPosition[0] = 'c';
+		break;
+	case 3:
+		newPosition[0] = 'd';
+		break;
+	case 4:
+		newPosition[0] = 'e';
+		break;
+	case 5:
+		newPosition[0] = 'f';
+		break;
+	case 6:
+		newPosition[0] = 'g';
+		break;
+	case 7:
+		newPosition[0] = 'h';
+		break;
+	default:
+		newPosition[0] =  'q';
+		break;
+	}
+
+	int chValue = y + 1;
+	newPosition[1] = char(chValue);
+
+	return newPosition;
+}
+
+
 unsigned Piece::getColor() const
 {
 	return this->color;
