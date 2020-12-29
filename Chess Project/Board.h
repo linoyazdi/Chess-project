@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "King.h"
 #include "Rook.h"
+#include "Knight.h"
 
 typedef std::vector<std::vector<Piece*>> boardMatrix;
 

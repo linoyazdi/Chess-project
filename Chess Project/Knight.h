@@ -4,7 +4,7 @@
 class Knight : public Piece
 {
 public:
-	virtual void move(boardMatrix& boardState, string from, string to, bool checkMove) override;
+	void move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove) override;
 	Knight(unsigned color);
 	Knight() = default;
 };
