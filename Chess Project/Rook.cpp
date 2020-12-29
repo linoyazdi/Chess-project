@@ -96,7 +96,7 @@ void Rook::move(boardMatrix& boardState, std::string& from, std::string& to, con
 						boardState[yTo][xTo] = this; // moving the king
 						boardState[y][x] = nullptr; // emptying the old place
 					}
-
+					
 					else 
 					{
 						throw Check();
