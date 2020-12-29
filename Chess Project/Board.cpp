@@ -60,7 +60,10 @@ void Board::init()
 	}
 	board[3][0] = new King(0);
 	board[5][0] = new King(1);
-	board[7][7] = new Rook(0);
+	board[3][6] = new Rook(0);
+	board[6][3] = new Rook(0);
+	board[6][5] = new Rook(0);
+	board[5][4] = new Bishop(0);
 }
 
 std::string Board::getString() const 
