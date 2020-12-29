@@ -5,6 +5,7 @@
 #include "Piece.h"
 #include "Player.h"
 #include "King.h"
+#include "Bishop.h"
 #include "Rook.h"
 #include "Knight.h"
 
