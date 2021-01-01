@@ -4,8 +4,8 @@
 
 unsigned Player::blackX = 0;
 unsigned Player::whiteX = 0;
-unsigned Player::blackY = 2;
-unsigned Player::whiteY = 4;
+unsigned Player::blackY = 5;
+unsigned Player::whiteY = 3;
 
 
 /*

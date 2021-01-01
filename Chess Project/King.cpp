@@ -17,8 +17,14 @@ void King::move(boardMatrix& boardState, std::string& from, std::string& to, con
 	if (x == xTo && y == yTo) {
 		throw SamePlace();
 	}
+	bool leftRight = (y == yTo && (x - 1 == xTo || x + 1 == xTo));
+	bool upDown = (x == xTo && (y - 1 == yTo || y + 1 == yTo));
+	bool upRightLeft = (y + 1 == yTo && (x - 1 == xTo || x + 1 == xTo));
+	bool downRightLeft = (y - 1 == yTo && (x - 1 == xTo || x + 1 == xTo));
+	bool validMove = ( leftRight || upDown || upRightLeft || downRightLeft);
+	size_t size = boardState.size();
 
-	if ((y == yTo && (x-1 == xTo || x+1 == xTo)) || (x == xTo && (y-1 == yTo || y+1 == yTo)) || (y+1 == yTo && (x-1 == xTo || x+1 == xTo) || (y - 1 == yTo && (x - 1 == xTo || x + 1 == xTo)))) {
+	if (validMove) {
 		if (boardState[yTo][xTo]) 
 		{
 			if (boardState[yTo][xTo]->getColor() == this->color) // if player from the same color
@@ -30,18 +36,74 @@ void King::move(boardMatrix& boardState, std::string& from, std::string& to, con
 			}
 			else
 			{
-				delete boardState[yTo][xTo]; // deleting ("eating") the other piece
-				boardState[yTo][xTo] = this; // moving the king
-				boardState[y][x] = nullptr; // emptying the old place
+				if (!checkMove) {
+					checkForSelfCheck(x, y, xTo, yTo, boardState);
+					delete boardState[yTo][xTo]; // deleting ("eating") the other piece
+					boardState[yTo][xTo] = this; // moving the king
+					boardState[y][x] = nullptr; // emptying the old place
+				}
+				else {
+					throw Check();
+				}
 			}
 		}
 		else 
 		{
-			boardState[yTo][xTo] = this; // moving the king
-			boardState[y][x] = nullptr; // emptying the old place
+			if (!checkMove) {
+				checkForSelfCheck(x, y, xTo, yTo, boardState);
+				boardState[yTo][xTo] = this; // moving the king
+				boardState[y][x] = nullptr; // emptying the old place
+			}
+			else {
+				throw Check();
+			}
 		}
+		// Update the new x, y after a successful move
+		updateXY(xTo, yTo);
 	}
 	else {
-		throw InvalidIndex();
+		if (!checkMove) {
+			throw InvalidIndex();
+		}
 	}
+}
+
+void King::updateXY(const unsigned newX, const unsigned newY)
+{
+	if (this->color == 0) {
+		Player::whiteX = newX;
+		Player::whiteY = newY;
+	}
+	else {
+		Player::blackX = newX;
+		Player::blackY = newY;
+	}
+}
+
+void King::checkForSelfCheck(const unsigned x, const unsigned y, const unsigned newX, const unsigned newY, boardMatrix& boardState)
+{
+	// Update the new x, y
+	updateXY(newX, newY);
+	boardState[y][x] = nullptr;
+	size_t size = boardState.size();
+	std::string kingPos = this->color == 1 ? Piece::createPosition(Player::blackX, Player::blackY) : Piece::createPosition(Player::whiteX, Player::whiteY);
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			try {
+				if (boardState[i][j]) {
+					if (boardState[i][j]->getColor() != this->color) {
+						std::string pos = Piece::createPosition(j, i);
+						boardState[i][j]->move(boardState, pos, kingPos, true);
+					}
+				}
+			}
+			catch (Check) {
+				// Return to the previous x, y if necessary 
+				updateXY(x, y);
+				boardState[y][x] = this;
+				throw CausingSelfCheck();
+			}
+		}
+	}
+	boardState[y][x] = this;
 }

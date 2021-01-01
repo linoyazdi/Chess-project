@@ -3,11 +3,14 @@
 int main()
 {
 	Game game;
-	game.giveState();
 	string move = "";
-	std::cin >> move;
-	std::cout << game.move(move);
 	game.giveState();
+	std::cin >> move;
+	while (move != "exit") {
+		std::cout << game.move(move);
+		game.giveState();
+		std::cin >> move;
+	}
 	system("pause");
 	return 0;
 }

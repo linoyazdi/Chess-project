@@ -84,7 +84,7 @@ string Piece::createPosition(int x, int y) {
 	}
 
 	int chValue = char(y);
-	newPosition[1] = char(1 + chValue + '0');
+	newPosition[1] = char(7 - chValue + 1 + '0');
 
 	return newPosition;
 }
