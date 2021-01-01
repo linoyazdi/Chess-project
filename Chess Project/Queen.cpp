@@ -82,7 +82,7 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 
 		if (x > xTo&& y > yTo)
 		{
-			for (unsigned i = 0; i < x - xTo; i++)
+			for (unsigned i = 0; i < x - xTo - 1; i++)
 			{
 				if (boardState[y - i - 1][x - i - 1])
 				{
@@ -96,7 +96,7 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 
 		if (x < xTo && y > yTo)
 		{
-			for (unsigned i = 0; i < xTo - x; i++)
+			for (unsigned i = 0; i < xTo - x - 1; i++)
 			{
 				if (boardState[y - i - 1][x + i + 1])
 				{
@@ -110,7 +110,7 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 
 		if (x < xTo && y < yTo)
 		{
-			for (unsigned i = 0; i < xTo - x; i++)
+			for (unsigned i = 0; i < xTo - x - 1; i++)
 			{
 				if (boardState[y + i + 1][x + i + 1])
 				{
@@ -124,7 +124,7 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 
 		if (x > xTo&& y < yTo)
 		{
-			for (unsigned i = 0; i < x - xTo; i++)
+			for (unsigned i = 0; i < x - xTo - 1; i++)
 			{
 				if (boardState[y + i + 1][x - i - 1])
 				{
