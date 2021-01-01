@@ -82,7 +82,6 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 	}
 	else
 	{
-		this->doneFirstMove = true;
 		if ((y == yTo + 1 && this->color == 0 && x == xTo) || (y == yTo - 1 && this->color == 1 && x == xTo) || (y == yTo + 2 && this->color == 0 && x == xTo) || (y == yTo - 2 && this->color == 1 && x == xTo))
 		{
 			if (boardState[yTo][xTo])
@@ -98,6 +97,7 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 			{
 				if (!checkMove)
 				{
+					this->doneFirstMove = true;
 					boardState[yTo][xTo] = this; // moving the knight
 					boardState[y][x] = nullptr; // emptying the old place
 				}
@@ -124,6 +124,7 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 				{
 					if (!checkMove)
 					{
+						this->doneFirstMove = true;
 						delete boardState[yTo][xTo]; // deleting ("eating") the other piece
 						boardState[yTo][xTo] = this; // moving the king
 						boardState[y][x] = nullptr; // emptying the old place
