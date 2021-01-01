@@ -24,7 +24,7 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 	{
 		if (x > xTo && y > yTo)
 		{
-			for (unsigned i = 0; i < x - xTo; i++)
+			for (int i = 0; i < x - xTo; i++)
 			{
 				if (boardState[y-i-1][x-i-1])
 				{
@@ -38,7 +38,7 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 
 		if (x < xTo&& y > yTo)
 		{
-			for (unsigned i = 0; i < xTo - x; i++)
+			for (int i = 0; i < xTo - x; i++)
 			{
 				if (boardState[y - i - 1][x + i + 1])
 				{
@@ -52,7 +52,7 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 
 		if (x < xTo && y < yTo)
 		{
-			for (unsigned i = 0; i < xTo - x; i++)
+			for (int i = 0; i < xTo - x; i++)
 			{
 				if (boardState[y + i + 1][x + i + 1])
 				{
@@ -66,7 +66,7 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 
 		if (x > xTo && y < yTo)
 		{
-			for (unsigned i = 0; i < x - xTo; i++)
+			for (int i = 0; i < x - xTo; i++)
 			{
 				if (boardState[y + i + 1][x - i - 1])
 				{

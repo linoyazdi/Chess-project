@@ -39,38 +39,45 @@ int Game::move(string move) {
 		board.move(from, to, turn);
 	}
 	
-	catch (Check) {
+	catch (Check& err) {
 		if (turn == 0) {
 			player1.setIsInCheck(true);
 		}
 		else {
 			player2.setIsInCheck(true);
 		}
+		std::cout << err.what();
 		turn = turn == 0 ? 1 : 0;
 		return 1;
 	}
 
-	catch (NoPieceToMove) {
+	catch (NoPieceToMove& err) {
+		std::cout << err.what();
 		return 2;
 	}
 
-	catch (PieceAtDestPlace) {
+	catch (PieceAtDestPlace& err) {
+		std::cout << err.what();
 		return 3;
 	}
 
-	catch (CausingSelfCheck) {
+	catch (CausingSelfCheck& err) {
+		std::cout << err.what();
 		return 4;
 	}
 
-	catch (InvalidIndex) {
+	catch (InvalidIndex& err) {
+		std::cout << err.what();
 		return 5;
 	}
 
-	catch (InvalidMoveToPiece) {
+	catch (InvalidMoveToPiece& err) {
+		std::cout << err.what();
 		return 6;
 	}
 
-	catch (SamePlace) {
+	catch (SamePlace& err) {
+		std::cout << err.what();
 		return 7;
 	}
 

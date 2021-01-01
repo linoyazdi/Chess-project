@@ -6,7 +6,16 @@ int main()
 	game.giveState();
 	string move = "";
 	std::cin >> move;
-	std::cout << game.move(move);
+	std::cout << game.move(move) << std::endl;
+	game.giveState();
+	std::cin >> move;
+	std::cout << game.move(move) << std::endl;
+	game.giveState();
+	std::cin >> move;
+	std::cout << game.move(move) << std::endl;
+	game.giveState();
+	std::cin >> move;
+	std::cout << game.move(move) << std::endl;
 	game.giveState();
 	system("pause");
 	return 0;

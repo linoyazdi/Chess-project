@@ -41,7 +41,11 @@ void King::move(boardMatrix& boardState, std::string& from, std::string& to, con
 			boardState[y][x] = nullptr; // emptying the old place
 		}
 	}
-	else {
-		throw InvalidIndex();
+	else 
+	{
+		if (!checkMove)
+		{
+			throw InvalidIndex();
+		}
 	}
 }
