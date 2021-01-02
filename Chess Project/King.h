@@ -10,5 +10,4 @@ public:
 	static void updateXY(const unsigned newX, const unsigned newY, const unsigned color); // updates the x,y of the static var king
 	void move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove) override; // moves the king
 	~King() = default; // desctructor
-	
 };

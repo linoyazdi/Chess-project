@@ -161,7 +161,7 @@ This function builds a new pawn - the constructor
 input: the color of the pawn
 output: none
 */
-Pawn::Pawn(unsigned color) : Piece(color, color == 0 ? 'P' : 'p')
+Pawn::Pawn(const unsigned color) : Piece(color, color == 0 ? 'P' : 'p')
 {
 	this->doneFirstMove = false;
 }

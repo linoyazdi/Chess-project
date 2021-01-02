@@ -1,17 +1,36 @@
 #include "Piece.h"
 
-Piece::Piece(unsigned color, char symbol) : symbol(symbol), color(color) {
+
+/*
+This function builds a new piece - the constructor
+input: the color of the piece, the type of the piece
+output: none
+*/
+Piece::Piece(const unsigned color, const char& symbol) : symbol(symbol), color(color) {
 
 }
 
 
+/*
+This function returns the symbol of the piece (according to the type)
+input: none
+output: the symbol
+*/
 char Piece::getSymbol() const {
 	return symbol;
 }
 
 
+/*
+This function converts the position of the piece to the x,y of the position
+input: the position of the piece 
+output: a string of two numbers
+*/
 string Piece::breakPosition(const string& position) {
 	string newPosition = "00";
+	const unsigned maxIndex = 7;
+	const char zeroChar = '0';
+
 	switch (position[0])
 	{
 	case 'a':
@@ -43,15 +62,23 @@ string Piece::breakPosition(const string& position) {
 		break;
 	}
 
-	int chValue = char((int)position[1] - 1) - '0';
-	newPosition[1] = char(7 - chValue + '0');
+	int chValue = char((int)position[1] - 1) - zeroChar;
+	newPosition[1] = char(maxIndex - chValue + zeroChar);
 
 	return newPosition;
 }
 
 
-string Piece::createPosition(int x, int y) {
+/*
+This function converts the x,y of the piece to a position
+input: the x,y of the piece's position
+output: a string of the position according to chess
+*/
+string Piece::createPosition(const int x, const int y) {
 	string newPosition = "00";
+	const unsigned maxIndex = 7;
+	const char zeroChar = '0';
+
 	switch (x)
 	{
 	case 0:
@@ -90,6 +117,11 @@ string Piece::createPosition(int x, int y) {
 }
 
 
+/*
+This function returns the color of the piece
+input: none
+output: the color of the piece
+*/
 unsigned Piece::getColor() const
 {
 	return this->color;

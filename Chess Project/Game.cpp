@@ -1,12 +1,15 @@
 #include "Game.h"
 
+
+/*
+This function builds a new game - the constructor
+input: none
+output: none
+*/
 Game::Game() : player1(Player(0)) , player2(Player(1)), turn(0){
 	board.init();
 }
 
-Game::~Game() {
-
-}
 
 /*
 the function prints the board state
@@ -20,14 +23,27 @@ void Game::giveState()
 	std::cout << board << std::endl;
 }
 
+
+/*
+This function returns the board state
+input: none
+output: the board state (the board' string, a char that represents the player's turn and the null char) 
+*/
 std::string Game::giveBoardString() const 
 {
-	char turn_char = turn == 0 ? '0' : '1';
-	std::string str = board.getString() + turn_char + '\0';
+	const char nullChar = '\0';
+	char turnChar = turn == 0 ? '0' : '1';
+	std::string str = board.getString() + turnChar + nullChar;
 	return str;
 }
 
-std::string Game::move(string move) {
+
+/*
+This function moves a piece
+input: the move
+output: a code that represents if the move was valid
+*/
+std::string Game::move(const string& move) {
 	string from = "00";
 	from[0] = move[0];
 	from[1] = move[1];

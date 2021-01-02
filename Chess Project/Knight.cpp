@@ -79,6 +79,6 @@ This function builds a new knight - the constructor
 input: the color of the knight
 output: none
 */
-Knight::Knight(unsigned color) : Piece(color, color == 0 ? 'N' : 'n')
+Knight::Knight(const unsigned color) : Piece(color, color == 0 ? 'N' : 'n')
 {
 }

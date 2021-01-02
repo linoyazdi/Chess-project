@@ -6,7 +6,7 @@ class Pawn : public Piece
 private:
 	bool doneFirstMove;
 public:
-	void move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove) override;
-	Pawn(unsigned color);
-	Pawn() = default;
+	void move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove) override; // moves the pawn
+	Pawn(const unsigned color); // constructor
+	Pawn() = default; // destructor
 };

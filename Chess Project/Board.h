@@ -20,13 +20,11 @@ private:
 	static unsigned BOARD_SIZE;
 
 public:
-	Board(boardMatrix board);
-	Board();
-	~Board();
-	void init();
-	boardMatrix getBoard() const;
-	void setBoard(boardMatrix newBoard) const;
-	std::string getString() const;
-	void move(std::string from, std::string to, unsigned turn);
-	friend std::ostream& operator<<(std::ostream& os, Board& board);
+	Board() = default; // regular constructor
+	~Board(); // destructor
+	void init(); // initializes the board
+	boardMatrix getBoard() const; // returns the board
+	std::string getString() const; // returns the board as a string
+	void move(std::string& from, std::string& to, const unsigned turn); // moves a piece on the board
+	friend std::ostream& operator<<(std::ostream& os, const Board& board); // adding the board to the os
 };
