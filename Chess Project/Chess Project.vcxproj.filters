@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Exception files">
       <UniqueIdentifier>{de2ac460-c358-4628-b806-96f60c111b9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Graphics">
+      <UniqueIdentifier>{b2af55d3-90e1-4dfb-8491-fb965276dc88}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -57,6 +60,9 @@
     <ClCompile Include="GameException.cpp">
       <Filter>Source Files\Exception files</Filter>
     </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bishop.h">
@@ -91,6 +97,15 @@
     </ClInclude>
     <ClInclude Include="GameException.h">
       <Filter>Header Files\Exception headers</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Pipe.h">
+      <Filter>Header Files\Graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

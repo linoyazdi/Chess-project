@@ -20,19 +20,20 @@ void Game::giveState()
 	std::cout << board << std::endl;
 }
 
-std::string Game::giveBoardString() const {
-	char turn_char = turn == 0? '0' : '1';
-	std::string str = board.getString() + turn_char + '0';
+std::string Game::giveBoardString() const 
+{
+	char turn_char = turn == 0 ? '0' : '1';
+	std::string str = board.getString() + turn_char + '\0';
 	return str;
 }
 
-int Game::move(string move) {
+std::string Game::move(string move) {
 	string from = "00";
 	from[0] = move[0];
 	from[1] = move[1];
 	string to = "00";
-	to[0] = move[3];
-	to[1] = move[4];
+	to[0] = move[2];
+	to[1] = move[3];
 	
 	
 	try {
@@ -48,37 +49,37 @@ int Game::move(string move) {
 		}
 		std::cout << err.what();
 		turn = turn == 0 ? 1 : 0;
-		return 1;
+		return "1\0";
 	}
 
 	catch (NoPieceToMove& err) {
 		std::cout << err.what();
-		return 2;
+		return "2\0";
 	}
 
 	catch (PieceAtDestPlace& err) {
 		std::cout << err.what();
-		return 3;
+		return "3\0";
 	}
 
 	catch (CausingSelfCheck& err) {
 		std::cout << err.what();
-		return 4;
+		return "4\0";
 	}
 
 	catch (InvalidIndex& err) {
 		std::cout << err.what();
-		return 5;
+		return "5\0";
 	}
 
 	catch (InvalidMoveToPiece& err) {
 		std::cout << err.what();
-		return 6;
+		return "6\0";
 	}
 
 	catch (SamePlace& err) {
 		std::cout << err.what();
-		return 7;
+		return "7\0";
 	}
 
 	catch (...) {
@@ -86,5 +87,5 @@ int Game::move(string move) {
 	}
 	// TODO: handle excaptions
 	turn = turn == 0 ? 1 : 0;
-	return 0;
+	return "0\0";
 }

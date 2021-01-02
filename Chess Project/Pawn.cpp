@@ -1,5 +1,12 @@
 #include "Pawn.h"
 
+
+/*
+This function moves the pawn
+input: the board, where the pawn is and where is the dest, and if the function called
+to check if the pawn can do check
+output: none
+*/
 void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
@@ -148,6 +155,12 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 	}
 }
 
+
+/*
+This function builds a new pawn - the constructor
+input: the color of the pawn
+output: none
+*/
 Pawn::Pawn(unsigned color) : Piece(color, color == 0 ? 'P' : 'p')
 {
 	this->doneFirstMove = false;

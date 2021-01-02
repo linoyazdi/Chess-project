@@ -1,10 +1,22 @@
 #include "King.h"
 
+
+/*
+This function builds a new king - the constructor
+input: the color of the king
+output: none
+*/
 King::King(unsigned color) : Piece(color, color == 0 ? 'K' : 'k'){
 
 }
 
 
+/*
+This function moves the king
+input: the board, where the king is and where is the dest, and if the function called
+to check if the king can do check
+output: none
+*/
 void King::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
@@ -68,7 +80,13 @@ void King::move(boardMatrix& boardState, std::string& from, std::string& to, con
 	}
 }
 
-void King::updateXY(const unsigned newX, const unsigned newY, unsigned color)
+
+/*
+This function updates the (x,y) of the player's king attribute
+input: the new x and y, the color of the king
+output: none
+*/
+void King::updateXY(const unsigned newX, const unsigned newY, const unsigned color)
 {
 	if (color == 0) {
 		Player::whiteX = newX;
@@ -80,6 +98,12 @@ void King::updateXY(const unsigned newX, const unsigned newY, unsigned color)
 	}
 }
 
+
+/*
+This function checks if the move can cause a self check
+input: the x,y of the current place, the x,y of the dest place and the board
+output: none
+*/
 void King::checkForSelfCheck(const unsigned x, const unsigned y, const unsigned newX, const unsigned newY, boardMatrix& boardState)
 {
 	// Update the new x, y
@@ -88,6 +112,7 @@ void King::checkForSelfCheck(const unsigned x, const unsigned y, const unsigned 
 	Piece* self = boardState[y][x];
 	boardState[y][x] = nullptr;
 	size_t size = boardState.size();
+
 	std::string kingPos = color == 1 ? Piece::createPosition(Player::blackX, Player::blackY) : Piece::createPosition(Player::whiteX, Player::whiteY);
 	for (int i = 0; i < size; i++) {
 		for (int j = 0; j < size; j++) {

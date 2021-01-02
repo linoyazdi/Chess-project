@@ -14,5 +14,5 @@ public:
 	~Game();
 	void giveState();
 	std::string giveBoardString() const;
-	int move(string move);
+	std::string move(string move);
 };

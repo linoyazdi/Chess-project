@@ -1,5 +1,12 @@
 #include "Knight.h"
 
+
+/*
+This function moves the knight
+input: the board, where the knight is and where is the dest, and if the function called
+to check if the knight can do check
+output: none
+*/
 void Knight::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
@@ -66,6 +73,12 @@ void Knight::move(boardMatrix& boardState, std::string& from, std::string& to, c
 	}
 }
 
+
+/*
+This function builds a new knight - the constructor
+input: the color of the knight
+output: none
+*/
 Knight::Knight(unsigned color) : Piece(color, color == 0 ? 'N' : 'n')
 {
 }
