@@ -60,6 +60,7 @@ void Board::init()
 	}
 	board[3][0] = new King(0);
 	board[5][0] = new King(1);
+	board[5][1] = new Pawn(1);
 	board[7][7] = new Queen(0);
 }
 
@@ -106,14 +107,53 @@ void Board::move(std::string from, std::string to, unsigned turn)
 		//checking if the piece is of the same color as the active player
 		if (board[y][x]->getColor() == turn)
 		{
+			String kingPos = turn == 1 ? Piece::createPosition(Player::blackX, Player::blackY) : Piece::createPosition(Player::whiteX, Player::whiteY);
+			
+			// Check if the piece is not a king, if so check if the move will cause a check on the king
+			// if it does the move is illigal and cant be played(it is called in chess a pin)
+			if (!(board[y][x]->getSymbol() == 'K' || board[y][x]->getSymbol() == 'k')) 
+			{
+				bool createdTemporaryPiece = false;
+				Piece* curPiece = board[y][x];
+				board[y][x] = nullptr;
+				// create a temporery piece at the place if there is nothing there
+				// in order to see if the piece will block a check on its move
+				if (!board[yTo][xTo]) {
+					board[yTo][xTo] = new Pawn(1);
+					createdTemporaryPiece = true;
+				}
+
+				try {
+					string kingFixedPos = Piece::breakPosition(kingPos);
+					unsigned kingX = kingFixedPos[0] - '0';
+					unsigned kingY = kingFixedPos[1] - '0';
+					King::checkForSelfCheck(kingX, kingY, kingX, kingY, board);
+				}
+				catch (CausingSelfCheck) {
+					// if we created a temporary piece, delete it
+					if (createdTemporaryPiece) {
+						delete board[yTo][xTo];
+						board[yTo][xTo] = nullptr;
+					}
+					board[y][x] = curPiece;
+					throw CausingSelfCheck();
+				}
+				// if we created a temporary piece, delete it
+				if (createdTemporaryPiece) {
+					delete board[yTo][xTo];
+					board[yTo][xTo] = nullptr;
+				}
+				board[y][x] = curPiece;
+			}
+
 			board[y][x]->move(board, from, to, false);
 
 			//getting the new location in x, y
 			string fixed = Piece::breakPosition(to);
 			unsigned newX = fixed[0] - '0';
 			unsigned newY = fixed[1] - '0';
-			String kingPos = turn == 0 ? Piece::createPosition(Player::blackX, Player::blackY) : Piece::createPosition(Player::whiteX, Player::whiteY);
-
+			kingPos = turn == 0 ? Piece::createPosition(Player::blackX, Player::blackY) : Piece::createPosition(Player::whiteX, Player::whiteY);
+			// check if the piece will cause a check on its move
 			board[newY][newX]->move(board, to, kingPos, true);
 		}
 		else
