@@ -2,10 +2,10 @@
 
 
 
-unsigned Player::blackX = 0;
-unsigned Player::whiteX = 0;
-unsigned Player::blackY = 5;
-unsigned Player::whiteY = 3;
+unsigned Player::blackX = 4;
+unsigned Player::whiteX = 4;
+unsigned Player::blackY = 0;
+unsigned Player::whiteY = 7;
 
 
 /*

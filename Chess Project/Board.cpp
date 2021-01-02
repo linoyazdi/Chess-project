@@ -58,10 +58,16 @@ void Board::init()
 			//std::cout << "Added a piece";
 		}
 	}
-	board[3][0] = new King(0);
-	board[5][0] = new King(1);
-	board[5][1] = new Pawn(1);
-	board[7][7] = new Queen(0);
+	board[7][4] = new King(0);
+	board[0][4] = new King(1);
+	board[7][3] = new Queen(0);
+	board[0][3] = new Queen(1);
+	for (unsigned i = 0; i < BOARD_SIZE; i++) {
+		board[6][i] = new Pawn(0);
+		board[1][i] = new Pawn(1);
+	}
+	
+
 }
 
 std::string Board::getString() const 
@@ -114,13 +120,20 @@ void Board::move(std::string from, std::string to, unsigned turn)
 			if (!(board[y][x]->getSymbol() == 'K' || board[y][x]->getSymbol() == 'k')) 
 			{
 				bool createdTemporaryPiece = false;
+				bool createdTemporaryOther = false;
 				Piece* curPiece = board[y][x];
+				Piece* takenPiece = board[yTo][xTo];
 				board[y][x] = nullptr;
 				// create a temporery piece at the place if there is nothing there
 				// in order to see if the piece will block a check on its move
 				if (!board[yTo][xTo]) {
-					board[yTo][xTo] = new Pawn(1);
+					board[yTo][xTo] = new Pawn(curPiece->getColor());
 					createdTemporaryPiece = true;
+				}
+				// handle the case that we eat the checking piece
+				else {
+					board[yTo][xTo] = new Pawn(takenPiece->getColor() == 0 ? 1 : 0);
+					createdTemporaryOther = true;
 				}
 
 				try {
@@ -135,13 +148,26 @@ void Board::move(std::string from, std::string to, unsigned turn)
 						delete board[yTo][xTo];
 						board[yTo][xTo] = nullptr;
 					}
+					// if we created a temporery other, delete it
+					else if (createdTemporaryOther)
+					{
+						delete board[yTo][xTo];
+						board[xTo][yTo] = takenPiece;
+					}
 					board[y][x] = curPiece;
 					throw CausingSelfCheck();
 				}
 				// if we created a temporary piece, delete it
-				if (createdTemporaryPiece) {
+				if (createdTemporaryPiece)
+				{
 					delete board[yTo][xTo];
 					board[yTo][xTo] = nullptr;
+				}
+				// if we created a temporery other, delete it
+				else if (createdTemporaryOther)
+				{
+					delete board[yTo][xTo];
+					board[yTo][xTo] = takenPiece;
 				}
 				board[y][x] = curPiece;
 			}
