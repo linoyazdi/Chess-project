@@ -1,5 +1,12 @@
 #include "Rook.h"
 
+
+/*
+This function moves the rook
+input: the board, where the rook is and where is the dest, and if the function called
+to check if the rook can do check
+output: none
+*/
 void Rook::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
@@ -123,6 +130,12 @@ void Rook::move(boardMatrix& boardState, std::string& from, std::string& to, con
 
 }
 
+
+/*
+This function builds a new rook - the constructor
+input: the color of the rook
+output: none
+*/
 Rook::Rook(unsigned color) : Piece(color, color == 0 ? 'R' : 'r')
 {
 }

@@ -1,10 +1,23 @@
 #include "Bishop.h"
 
+
+/*
+This function builds a new bishop - the constructor
+input: the color of the bishop
+output: none
+*/
 Bishop::Bishop(const unsigned color) : Piece(color, color == 0 ? 'B' : 'b')
 {
 
 }
 
+
+/*
+This function moves the bishop
+input: the board, where the bishop is and where is the dest, and if the function called
+to check if the bishop can do check
+output: none
+*/
 void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
