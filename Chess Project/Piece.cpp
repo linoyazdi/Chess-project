@@ -130,7 +130,7 @@ unsigned Piece::getColor() const
 
 /*
 This function returns if the piece done its first move
-ompuy: none
+input: none
 output: true if the piece done its first move otherwise false
 */
 bool Piece::hasMoved() const
@@ -138,6 +138,12 @@ bool Piece::hasMoved() const
 	return this->doneFirstMove;
 }
 
+
+/*
+This function sets if the piece done its first move
+input: true if the piece done its first move otherwise false
+output: none
+*/
 void Piece::setHasMove(bool flag)
 {
 	this->doneFirstMove = flag;
