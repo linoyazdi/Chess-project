@@ -14,5 +14,5 @@ public:
 	~Game() = default; // destructor
 	void giveState(); // returns the state
 	std::string giveBoardString() const; // returns the board string
-	std::string move(const string& move); // moves a piece
+	std::string move(const std::string& move); // moves a piece
 };

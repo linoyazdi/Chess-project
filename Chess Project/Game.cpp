@@ -43,11 +43,11 @@ This function moves a piece
 input: the move
 output: a code that represents if the move was valid
 */
-std::string Game::move(const string& move) {
-	string from = "00";
+std::string Game::move(const std::string& move) {
+	std::string from = "00";
 	from[0] = move[0];
 	from[1] = move[1];
-	string to = "00";
+	std::string to = "00";
 	to[0] = move[2];
 	to[1] = move[3];
 	

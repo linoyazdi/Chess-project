@@ -19,7 +19,7 @@ output: none
 */
 void King::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
-	string fixedPosition = Piece::breakPosition(from);
+	std::string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';
 	unsigned y = fixedPosition[1] - '0';
 	fixedPosition = Piece::breakPosition(to);
