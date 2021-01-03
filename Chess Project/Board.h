@@ -25,6 +25,6 @@ public:
 	void init(); // initializes the board
 	boardMatrix getBoard() const; // returns the board
 	std::string getString() const; // returns the board as a string
-	void move(std::string& from, std::string& to, const unsigned turn); // moves a piece on the board
+	void move(const std::string& from, const std::string& to, const unsigned turn); // moves a piece on the board
 	friend std::ostream& operator<<(std::ostream& os, const Board& board); // adding the board to the os
 };

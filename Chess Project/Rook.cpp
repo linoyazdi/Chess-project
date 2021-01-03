@@ -7,7 +7,7 @@ input: the board, where the rook is and where is the dest, and if the function c
 to check if the rook can do check
 output: none
 */
-void Rook::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
+void Rook::move(boardMatrix& boardState, const std::string& from, const std::string& to, const bool checkMove)
 {
 	std::string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';

@@ -144,7 +144,7 @@ This function sets if the piece done its first move
 input: true if the piece done its first move otherwise false
 output: none
 */
-void Piece::setHasMove(bool flag)
+void Piece::setHasMove(const bool flag)
 {
 	this->doneFirstMove = flag;
 }

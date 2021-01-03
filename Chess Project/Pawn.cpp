@@ -7,7 +7,7 @@ input: the board, where the pawn is and where is the dest, and if the function c
 to check if the pawn can do check
 output: none
 */
-void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
+void Pawn::move(boardMatrix& boardState, const std::string& from, const std::string& to, const bool checkMove)
 {
 	std::string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';

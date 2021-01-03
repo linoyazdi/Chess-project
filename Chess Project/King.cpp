@@ -17,7 +17,7 @@ input: the board, where the king is and where is the dest, and if the function c
 to check if the king can do check
 output: none
 */
-void King::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
+void King::move(boardMatrix& boardState, const std::string& from, const std::string& to, const bool checkMove)
 {
 	enum rows{LastRow = 0, FirstRow = 7};
 	enum cols{LeftRook, LeftKnight, LeftBishop, Queenpos, Kingpos, RightBishop, RightKnight, RightRook};

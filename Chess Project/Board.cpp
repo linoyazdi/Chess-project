@@ -122,7 +122,7 @@ This function moves a piece on the boatd
 input: the position of the piece, the dest position and the turn of the player
 output: none
 */
-void Board::move(std::string& from, std::string& to, const unsigned turn)
+void Board::move(const std::string& from, const std::string& to, const unsigned turn)
 {
 	std::string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';

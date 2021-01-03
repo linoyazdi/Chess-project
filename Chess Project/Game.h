@@ -12,7 +12,7 @@ private:
 public:
 	Game(); // constructor
 	~Game() = default; // destructor
-	void giveState(); // returns the state
+	void giveState() const; // returns the state
 	std::string giveBoardString() const; // returns the board string
 	std::string move(const std::string& move); // moves a piece
 };

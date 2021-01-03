@@ -16,7 +16,7 @@ the function prints the board state
 input: none
 output: none
 */
-void Game::giveState()
+void Game::giveState() const
 {
 	std::string players_turn = turn == 0 ? "white's turn\n" : "black's turn\n";
 	std::cout << players_turn;
