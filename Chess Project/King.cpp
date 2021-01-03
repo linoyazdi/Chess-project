@@ -231,30 +231,33 @@ output: none
 void King::checkForSelfCheck(const unsigned x, const unsigned y, const unsigned newX, const unsigned newY, boardMatrix& boardState)
 {
 	// Update the new x, y
-	unsigned color = boardState[y][x]->getColor();
-	updateXY(newX, newY, color);
-	Piece* self = boardState[y][x];
-	boardState[y][x] = nullptr;
-	size_t size = boardState.size();
+	if (boardState[y][x])
+	{
+		unsigned color = boardState[y][x]->getColor();
+		updateXY(newX, newY, color);
+		Piece* self = boardState[y][x];
+		boardState[y][x] = nullptr;
+		size_t size = boardState.size();
 
-	std::string kingPos = color == 1 ? Piece::createPosition(Player::blackX, Player::blackY) : Piece::createPosition(Player::whiteX, Player::whiteY);
-	for (int i = 0; i < size; i++) {
-		for (int j = 0; j < size; j++) {
-			try {
-				if (boardState[i][j]) {
-					if (boardState[i][j]->getColor() != color) {
-						std::string pos = Piece::createPosition(j, i);
-						boardState[i][j]->move(boardState, pos, kingPos, true);
+		std::string kingPos = color == 1 ? Piece::createPosition(Player::blackX, Player::blackY) : Piece::createPosition(Player::whiteX, Player::whiteY);
+		for (int i = 0; i < size; i++) {
+			for (int j = 0; j < size; j++) {
+				try {
+					if (boardState[i][j]) {
+						if (boardState[i][j]->getColor() != color) {
+							std::string pos = Piece::createPosition(j, i);
+							boardState[i][j]->move(boardState, pos, kingPos, true);
+						}
 					}
 				}
-			}
-			catch (Check) {
-				// Return to the previous x, y if necessary 
-				updateXY(x, y, color);
-				boardState[y][x] = self;
-				throw CausingSelfCheck();
+				catch (Check) {
+					// Return to the previous x, y if necessary 
+					updateXY(x, y, color);
+					boardState[y][x] = self;
+					throw CausingSelfCheck();
+				}
 			}
 		}
+		boardState[y][x] = self;
 	}
-	boardState[y][x] = self;
 }
