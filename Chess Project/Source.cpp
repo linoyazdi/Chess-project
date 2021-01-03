@@ -11,7 +11,7 @@ in order to read and write information from and to the Backend
 #include <string>
 
 
-void main()
+int main()
 {
 	srand(time_t(NULL));
 
@@ -41,13 +41,14 @@ void main()
 			std::cout << game.move(move);
 			game.giveState();
 			std::cin >> move;
-			while (move != "exit") {
+
+			while (move != "exit") 
+			{
 				std::cout << game.move(move);
 				game.giveState();
 				std::cin >> move;
 			}
-
-			return;
+			return 0;
 		}
 	}
 
@@ -67,7 +68,7 @@ void main()
 	{
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
-
+	
 		std::string move = game.move(msgFromGraphics);
 		strcpy_s(msgToGraphics, move.c_str()); // msgToGraphics should contain the result of the operation
 
@@ -85,5 +86,5 @@ void main()
 	}
 
 	p.close();
-	//std::cout << "\nleaks: " << _CrtDumpMemoryLeaks();
+	return 0;
 }

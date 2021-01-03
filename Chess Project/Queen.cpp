@@ -20,11 +20,11 @@ output: none
 void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
 	std::string fixedPosition = Piece::breakPosition(from);
-	int x = fixedPosition[0] - '0';
-	int y = fixedPosition[1] - '0';
+	unsigned x = fixedPosition[0] - '0';
+	unsigned y = fixedPosition[1] - '0';
 	fixedPosition = Piece::breakPosition(to);
-	int xTo = fixedPosition[0] - '0';
-	int yTo = fixedPosition[1] - '0';
+	unsigned xTo = fixedPosition[0] - '0';
+	unsigned yTo = fixedPosition[1] - '0';
 	bool flag = true;
 
 	if (x == xTo && y == yTo && !checkMove) {
@@ -32,11 +32,11 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 	}
 
 
-	if ((x == xTo && y != yTo) || (x != xTo && y == yTo) || xTo - x == yTo - y || -xTo + x == yTo - y)
+	if ((x == xTo && y != yTo) || (x != xTo && y == yTo) || xTo - x == yTo - y || x - xTo == yTo - y)
 	{
 		if (x > xTo && y == yTo)
 		{
-			for (int i = x - 1; i > xTo; i--)
+			for (unsigned i = x - 1; i > xTo; i--)
 			{
 				if (boardState[yTo][i])
 				{
@@ -50,7 +50,7 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 
 		else if (x < xTo && y == yTo)
 		{
-			for (int i = x + 1; i < xTo; i++)
+			for (unsigned i = x + 1; i < xTo; i++)
 			{
 				if (boardState[yTo][i])
 				{
@@ -64,7 +64,7 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 
 		else if (y < yTo && x == xTo)
 		{
-			for (int i = y+1; i < yTo; i++)
+			for (unsigned i = y+1; i < yTo; i++)
 			{
 				if (boardState[i][xTo])
 				{
@@ -78,7 +78,7 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 
 		else if (y > yTo && x == xTo)
 		{
-			for (int i = y-1; i > yTo; i--)
+			for (unsigned i = y-1; i > yTo; i--)
 			{
 				if (boardState[i][xTo])
 				{
@@ -92,7 +92,7 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 
 		if (x > xTo&& y > yTo)
 		{
-			for (int i = 0; i < x - xTo - 1; i++)
+			for (unsigned i = 0; i < x - xTo - 1; i++)
 			{
 				if (boardState[y - i - 1][x - i - 1])
 				{
@@ -106,9 +106,10 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 
 		if (x < xTo && y > yTo)
 		{
-			for (int i = 0; i < xTo - x - 1; i++)
+			for (unsigned i = 0; i < xTo - x - 1; i++)
 			{
-				if (boardState[y - i - 1][x + i + 1])
+				unsigned tempX = x + i + 1;
+				if (boardState[y - i - 1][tempX])
 				{
 					if (!checkMove) {
 						throw PieceAtDestPlace();
@@ -120,9 +121,11 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 
 		if (x < xTo && y < yTo)
 		{
-			for (int i = 0; i < xTo - x - 1; i++)
+			for (unsigned i = 0; i < xTo - x - 1; i++)
 			{
-				if (boardState[y + i + 1][x + i + 1])
+				unsigned tempY = y + i + 1;
+				unsigned tempX = x + i + 1;
+				if (boardState[tempY][tempX])
 				{
 					if (!checkMove) {
 						throw PieceAtDestPlace();
@@ -134,9 +137,10 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 
 		if (x > xTo&& y < yTo)
 		{
-			for (int i = 0; i < x - xTo - 1; i++)
+			for (unsigned i = 0; i < x - xTo - 1; i++)
 			{
-				if (boardState[y + i + 1][x - i - 1])
+				unsigned tempY = y + i + 1;
+				if (boardState[tempY][x - i - 1])
 				{
 					if (!checkMove) {
 						throw PieceAtDestPlace();

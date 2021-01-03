@@ -55,13 +55,12 @@ void Rook::move(boardMatrix& boardState, std::string& from, std::string& to, con
 
 		else if (y < yTo)
 		{
-			for (unsigned i = y; i > yTo; i--)
+			for (unsigned i = y + 1; i < yTo; i++)
 			{
 				if (boardState[i][xTo])
 				{
 					if (!checkMove) {
 						throw PieceAtDestPlace();
-						std::cout << "blocked!";
 					}
 					flag = false;
 				}
@@ -70,13 +69,12 @@ void Rook::move(boardMatrix& boardState, std::string& from, std::string& to, con
 
 		else if (y > yTo)
 		{
-			for (unsigned i = y; i < yTo; i++)
+			for (unsigned i = y - 1; i > yTo; i--)
 			{
 				if (boardState[i][xTo])
 				{
 					if (!checkMove) {
 						throw PieceAtDestPlace();
-						std::cout << "blocked!";
 					}
 					flag = false;
 				}
