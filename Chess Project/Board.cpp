@@ -209,6 +209,12 @@ void Board::move(std::string& from, std::string& to, const unsigned turn)
 			}
 
 			board[y][x]->move(board, from, to, false);
+			
+			if (board[yTo][xTo])
+			{
+				board[yTo][xTo]->setHasMove(true);
+			}
+			
 
 			//getting the new location in x, y
 			std::string fixed = Piece::breakPosition(to);

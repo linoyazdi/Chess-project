@@ -38,7 +38,7 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 			{
 				if (!checkMove)
 				{
-					boardState[yTo][xTo] = this; // moving the knight
+					boardState[yTo][xTo] = this; // moving the pawn
 					boardState[y][x] = nullptr; // emptying the old place
 				}
 			}

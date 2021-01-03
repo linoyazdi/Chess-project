@@ -23,7 +23,7 @@ int main()
 	while (!isConnect)
 	{
 		std::cout << "cant connect to graphics" << std::endl;
-		std::cout << "Do you try to connect again or exit? (0-try again, 1-exit)" << std::endl;
+		std::cout << "Do you try to connect again or exit? (0-try again, 1-run only the backend)" << std::endl;
 		std::cin >> ans;
 
 		if (ans == "0")

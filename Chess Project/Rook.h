@@ -5,6 +5,7 @@ using String = std::string;
 
 class Rook : public Piece
 {
+private:
 public:
 	void move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove) override; // moves the rook
 	Rook(const unsigned color); // constructor

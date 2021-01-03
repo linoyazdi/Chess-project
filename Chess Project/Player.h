@@ -6,16 +6,13 @@ class Player
 {
 private:
 	unsigned color;
-	unsigned overallScore;
 
 public:
-	// getters
+	// getter
 	unsigned getColor() const;
-	unsigned getOverallScore() const;
 
-	// setters
+	// setter
 	void setColor(const unsigned color);
-	void incOverallScore(const unsigned value);
 
 	Player(const unsigned color); // constructor
 	~Player() = default; // destructor
