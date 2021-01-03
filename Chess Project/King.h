@@ -4,6 +4,7 @@
 
 class King : public Piece 
 {
+private:
 public:
 	King(unsigned color); // constructor
 	static void checkForSelfCheck(const unsigned x, const unsigned y, const unsigned newX, const unsigned newY, boardMatrix& boardState); // checking self check

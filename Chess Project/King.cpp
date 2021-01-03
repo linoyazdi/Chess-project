@@ -7,7 +7,7 @@ input: the color of the king
 output: none
 */
 King::King(unsigned color) : Piece(color, color == 0 ? 'K' : 'k'){
-
+	this->doneFirstMove = false;
 }
 
 
@@ -19,6 +19,8 @@ output: none
 */
 void King::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
+	enum rows{LastRow = 0, FirstRow = 7};
+	enum cols{LeftRook, LeftKnight, LeftBishop, Queenpos, Kingpos, RightBishop, RightKnight, RightRook};
 	std::string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';
 	unsigned y = fixedPosition[1] - '0';
@@ -29,6 +31,7 @@ void King::move(boardMatrix& boardState, std::string& from, std::string& to, con
 	if (x == xTo && y == yTo && !checkMove) {
 		throw SamePlace();
 	}
+
 	bool leftRight = (y == yTo && (x - 1 == xTo || x + 1 == xTo));
 	bool upDown = (x == xTo && (y - 1 == yTo || y + 1 == yTo));
 	bool upRightLeft = (y + 1 == yTo && (x - 1 == xTo || x + 1 == xTo));
@@ -36,7 +39,8 @@ void King::move(boardMatrix& boardState, std::string& from, std::string& to, con
 	bool validMove = ( leftRight || upDown || upRightLeft || downRightLeft);
 	size_t size = boardState.size();
 
-	if (validMove) {
+	if (validMove) 
+	{
 		if (boardState[yTo][xTo]) 
 		{
 			if (boardState[yTo][xTo]->getColor() == this->color) // if player from the same color
@@ -72,6 +76,118 @@ void King::move(boardMatrix& boardState, std::string& from, std::string& to, con
 		}
 		// Update the new x, y after a successful move
 		updateXY(xTo, yTo, color);
+	}
+	else if (!doneFirstMove && !checkMove) //  the king didn't move
+	{
+		if (color == 0) // white
+		{
+			if ((xTo == RightRook || xTo == LeftRook) && yTo == FirstRow) // right indexes
+			{
+				// the rook is at its first position and didn't move yet
+				if (boardState[yTo][xTo] && boardState[yTo][xTo]->getSymbol() == 'R' && !boardState[yTo][xTo]->hasMoved())
+				{
+					if (xTo == RightRook)
+					{
+						// no pieces blocking on the way
+						if (boardState[FirstRow][6] == nullptr && boardState[FirstRow][5] == nullptr)
+						{
+							boardState[FirstRow][RightKnight] = boardState[FirstRow][Kingpos];
+							boardState[FirstRow][RightBishop] = boardState[FirstRow][RightRook];
+							boardState[FirstRow][RightRook] = nullptr;
+							boardState[FirstRow][Kingpos] = nullptr;
+							Player::whiteX = RightKnight;
+							Player::whiteY = FirstRow;
+						}
+						else
+						{
+							throw PieceAtDestPlace();
+						}
+					}
+					else if (xTo == 0)
+					{
+						// no pieces blocking on the way
+						if (boardState[FirstRow][LeftKnight] == nullptr && boardState[FirstRow][LeftBishop] == nullptr && boardState[FirstRow][Queenpos] == nullptr)
+						{
+							boardState[FirstRow][LeftBishop] = boardState[FirstRow][Kingpos];
+							boardState[FirstRow][Queenpos] = boardState[FirstRow][LeftRook];
+							boardState[FirstRow][Kingpos] = nullptr;
+							boardState[FirstRow][LeftRook] = nullptr;
+							Player::whiteX = LeftBishop;
+							Player::whiteY = FirstRow;
+						}
+						else
+						{
+							throw PieceAtDestPlace();
+						}
+					}
+					else
+					{
+						throw InvalidMoveToPiece();
+					}
+				}
+				else
+				{
+					throw PieceAtDestPlace();
+				}
+			}
+			else
+			{
+				throw InvalidMoveToPiece();
+			}
+		}
+		else // color black
+		{
+			if ((xTo == 7 || xTo == 0) && yTo == 0) // right indexes
+			{
+				// the rook is at its first position and didn't move yet
+				if (boardState[yTo][xTo] && boardState[yTo][xTo]->getSymbol() == 'r' && !boardState[yTo][xTo]->hasMoved())
+				{
+					if (xTo == 7)
+					{
+						// no pieces blocking on the way
+						if (boardState[0][6] == nullptr && boardState[0][5] == nullptr)
+						{
+							boardState[0][6] = boardState[0][4];
+							boardState[0][5] = boardState[0][7];
+							boardState[0][7] = nullptr;
+							boardState[0][4] = nullptr;
+							Player::blackX = 6;
+							Player::blackY = 0;
+						}
+						else
+						{
+							throw PieceAtDestPlace();
+						}
+					}
+					else if (xTo == 0)
+					{
+						// no pieces blocking on the way
+						if (boardState[0][1] == nullptr && boardState[0][2] == nullptr && boardState[0][3] == nullptr)
+						{
+							boardState[0][2] = boardState[0][4];
+							boardState[0][3] = boardState[0][0];
+							boardState[0][4] = nullptr;
+							boardState[0][0] = nullptr;
+							Player::blackX = 2;
+							Player::blackY = 0;
+						}
+						else
+						{
+							throw PieceAtDestPlace();
+						}
+					}
+					else
+					{
+						throw InvalidMoveToPiece();
+					}
+				}
+				else
+				{
+					throw PieceAtDestPlace();
+				}
+			}
+		}
+		
 	}
 	else {
 		if (!checkMove) {

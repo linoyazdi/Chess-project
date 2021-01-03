@@ -7,7 +7,7 @@ input: the color of the piece, the type of the piece
 output: none
 */
 Piece::Piece(const unsigned color, const char& symbol) : symbol(symbol), color(color) {
-
+	this->doneFirstMove = false;
 }
 
 
@@ -125,5 +125,21 @@ output: the color of the piece
 unsigned Piece::getColor() const
 {
 	return this->color;
+}
+
+
+/*
+This function returns if the piece done its first move
+ompuy: none
+output: true if the piece done its first move otherwise false
+*/
+bool Piece::hasMoved() const
+{
+	return this->doneFirstMove;
+}
+
+void Piece::setHasMove(bool flag)
+{
+	this->doneFirstMove = flag;
 }
 
