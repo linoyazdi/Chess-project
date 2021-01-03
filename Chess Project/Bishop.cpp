@@ -29,7 +29,7 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 
 	bool flag = true;
 
-	if (x == xTo && y == yTo) {
+	if (x == xTo && y == yTo && !checkMove) {
 		throw SamePlace();
 	}
 

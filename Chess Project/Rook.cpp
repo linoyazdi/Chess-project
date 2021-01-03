@@ -17,7 +17,7 @@ void Rook::move(boardMatrix& boardState, std::string& from, std::string& to, con
 	unsigned yTo = fixedPosition[1] - '0';
 	bool flag = true;
 
-	if (x == xTo && y == yTo) {
+	if (x == xTo && y == yTo && !checkMove) {
 		throw SamePlace();
 	}
 

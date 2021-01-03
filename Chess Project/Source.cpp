@@ -40,6 +40,18 @@ void main()
 		else
 		{
 			p.close();
+			game.giveState();
+			string move = "";
+			std::cin >> move;
+			std::cout << game.move(move);
+			game.giveState();
+			std::cin >> move;
+			while (move != "exit") {
+				std::cout << game.move(move);
+				game.giveState();
+				std::cin >> move;
+			}
+
 			return;
 		}
 	}
@@ -49,7 +61,7 @@ void main()
 	// msgToGraphics should contain the board string accord the protocol
 	// YOUR CODE
 
-	strcpy_s(msgToGraphics, "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR1"); // just example...
+	strcpy_s(msgToGraphics, game.giveBoardString().c_str()); // just example...
 
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 
@@ -65,9 +77,9 @@ void main()
 		strcpy_s(msgToGraphics, move.c_str()); // msgToGraphics should contain the result of the operation
 
 		/******* JUST FOR EREZ DEBUGGING ******/
-		int r = rand() % 10; // just for debugging......
-		msgToGraphics[0] = (char)(1 + '0');
-		msgToGraphics[1] = 0;
+		//int r = rand() % 10; // just for debugging......
+		//msgToGraphics[0] = (char)(1 + '0');
+		//msgToGraphics[1] = 0;
 		/******* JUST FOR EREZ DEBUGGING ******/
 
 		// return result to graphics		

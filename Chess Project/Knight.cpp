@@ -17,11 +17,11 @@ void Knight::move(boardMatrix& boardState, std::string& from, std::string& to, c
 	unsigned yTo = fixedPosition[1] - '0';
 	bool flag = true;
 
-	if (x == xTo && y == yTo) {
+	if (x == xTo && y == yTo && !checkMove) {
 		throw SamePlace();
 	}
 
-	if ((x == xTo - 2 && y == yTo - 1) || (x == xTo - 1 && y == yTo - 2) || (x == xTo + 2 && y == yTo + 1) || (x == xTo + 1 && y == yTo + 2))
+	if ((x == xTo - 2 && y == yTo - 1) || (x == xTo - 1 && y == yTo - 2) || (x == xTo + 2 && y == yTo + 1) || (x == xTo + 1 && y == yTo + 2) || (x == xTo + 1 && y == yTo - 2) || (x == xTo + 2 && y == yTo - 1 || (x == xTo - 2 && y == yTo + 1) || (x == xTo - 1 && y == yTo + 2)))
 	{
 		if (boardState[yTo][xTo])
 		{

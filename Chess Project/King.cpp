@@ -26,7 +26,7 @@ void King::move(boardMatrix& boardState, std::string& from, std::string& to, con
 	unsigned xTo = fixedPosition[0] - '0';
 	unsigned yTo = fixedPosition[1] - '0';
 
-	if (x == xTo && y == yTo) {
+	if (x == xTo && y == yTo && !checkMove) {
 		throw SamePlace();
 	}
 	bool leftRight = (y == yTo && (x - 1 == xTo || x + 1 == xTo));

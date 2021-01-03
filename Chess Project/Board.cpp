@@ -62,11 +62,25 @@ void Board::init()
 	board[0][4] = new King(1);
 	board[7][3] = new Queen(0);
 	board[0][3] = new Queen(1);
+	
 	for (unsigned i = 0; i < BOARD_SIZE; i++) {
 		board[6][i] = new Pawn(0);
 		board[1][i] = new Pawn(1);
 	}
-	
+	board[0][0] = new Rook(1);
+	board[0][7] = new Rook(1);
+	board[7][7] = new Rook(0);
+	board[7][0] = new Rook(0);
+	board[0][1] = new Knight(1);
+	board[0][6] = new Knight(1);
+	board[7][6] = new Knight(0);
+	board[7][1] = new Knight(0);
+
+	board[7][5] = new Bishop(0);
+	board[7][2] = new Bishop(0);
+	board[0][5] = new Bishop(1);
+	board[0][2] = new Bishop(1);
+
 
 }
 
@@ -152,7 +166,7 @@ void Board::move(std::string from, std::string to, unsigned turn)
 					else if (createdTemporaryOther)
 					{
 						delete board[yTo][xTo];
-						board[xTo][yTo] = takenPiece;
+						board[yTo][xTo] = takenPiece;
 					}
 					board[y][x] = curPiece;
 					throw CausingSelfCheck();

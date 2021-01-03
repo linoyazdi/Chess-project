@@ -17,7 +17,7 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 	unsigned yTo = fixedPosition[1] - '0';
 	bool flag = true;
 
-	if (x == xTo && y == yTo) {
+	if (x == xTo && y == yTo && !checkMove) {
 		throw SamePlace();
 	}
 
@@ -41,18 +41,13 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 					boardState[yTo][xTo] = this; // moving the knight
 					boardState[y][x] = nullptr; // emptying the old place
 				}
-
-				else
-				{
-					throw Check();
-				}
 			}
 		}
-		else if ((x == xTo + 1 && y == yTo + 1 && this->color == 0) || (x == xTo + 1 && y == yTo - 1 && this->color == 0) || (x == xTo - 1 && y == yTo + 1 && this->color == 1) || (x == xTo + 1 && y == yTo + 1 && this->color == 1))
+		else if ((x == xTo + 1 && y == yTo + 1 && this->color == 0) || (x == xTo - 1 && y == yTo + 1 && this->color == 0) || (x == xTo - 1 && y == yTo - 1 && this->color == 1) || (x == xTo + 1 && y == yTo - 1 && this->color == 1))
 		{
-			if (boardState[yTo][xTo])
+			if (boardState[yTo][xTo] || checkMove)
 			{
-				if (boardState[yTo][xTo]->getColor() == this->color)
+				if (!checkMove && boardState[yTo][xTo]->getColor() == this->color)
 				{
 					if (!checkMove)
 					{
@@ -71,10 +66,7 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 
 					else
 					{
-						if (!checkMove)
-						{
-							throw Check();
-						}
+						throw Check();
 					}
 				}
 			}
@@ -107,11 +99,6 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 					this->doneFirstMove = true;
 					boardState[yTo][xTo] = this; // moving the knight
 					boardState[y][x] = nullptr; // emptying the old place
-				}
-
-				else
-				{
-					throw Check();
 				}
 			}
 		}
