@@ -75,6 +75,11 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 					}
 				}
 			}
+			else {
+				if (!checkMove) {
+					throw InvalidMoveToPiece();
+				}
+			}
 		}
 		else
 		{
@@ -138,6 +143,11 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 					{
 						throw Check();
 					}
+				}
+			}
+			else {
+				if (!checkMove) {
+					throw InvalidMoveToPiece();
 				}
 			}
 		}
