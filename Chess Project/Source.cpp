@@ -41,12 +41,13 @@ int main()
 			std::cout << game.move(move);
 			game.giveState();
 			std::cin >> move;
-			while (move != "exit") {
+
+			while (move != "exit") 
+			{
 				std::cout << game.move(move);
 				game.giveState();
 				std::cin >> move;
 			}
-
 			return 0;
 		}
 	}
@@ -67,7 +68,7 @@ int main()
 	{
 		// should handle the string the sent from graphics
 		// according the protocol. Ex: e2e4           (move e2 to e4)
-
+	
 		std::string move = game.move(msgFromGraphics);
 		strcpy_s(msgToGraphics, move.c_str()); // msgToGraphics should contain the result of the operation
 
@@ -85,6 +86,5 @@ int main()
 	}
 
 	p.close();
-	std::cout << "\nleaks: " << _CrtDumpMemoryLeaks();
 	return 0;
 }
