@@ -26,8 +26,8 @@ This function converts the position of the piece to the x,y of the position
 input: the position of the piece 
 output: a string of two numbers
 */
-string Piece::breakPosition(const string& position) {
-	string newPosition = "00";
+std::string Piece::breakPosition(const std::string& position) {
+	std::string newPosition = "00";
 	const unsigned maxIndex = 7;
 	const char zeroChar = '0';
 
@@ -74,8 +74,8 @@ This function converts the x,y of the piece to a position
 input: the x,y of the piece's position
 output: a string of the position according to chess
 */
-string Piece::createPosition(const int x, const int y) {
-	string newPosition = "00";
+std::string Piece::createPosition(const int x, const int y) {
+	std::string newPosition = "00";
 	const unsigned maxIndex = 7;
 	const char zeroChar = '0';
 

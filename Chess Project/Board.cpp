@@ -39,12 +39,10 @@ output: the stream updated
 */
 std::ostream& operator<<(std::ostream& os, const Board& board)
 {	
-	Piece* piece = nullptr;
 	for (unsigned i = 0; i < board.getBoard().size(); i++) {
 		for (unsigned j = 0; j < board.getBoard()[0].size(); j++) {
-			piece = board.getBoard()[i][j];
-			if (piece) {
-				os << piece->getSymbol() << " ";
+			if (board.getBoard()[i][j]) {
+				os << board.getBoard()[i][j]->getSymbol() << " ";
 			}
 			else {
 				os << "_" << " ";
@@ -52,9 +50,6 @@ std::ostream& operator<<(std::ostream& os, const Board& board)
 		}
 		os << std::endl;
 	}
-	
-	delete piece;
-	piece = nullptr;
 
 	return os;
 }
@@ -129,10 +124,10 @@ output: none
 */
 void Board::move(std::string& from, std::string& to, const unsigned turn)
 {
-	string fixedPosition = Piece::breakPosition(from);
+	std::string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';
 	unsigned y = fixedPosition[1] - '0';
-	string positionTo = Piece::breakPosition(to);
+	std::string positionTo = Piece::breakPosition(to);
 	unsigned xTo = positionTo[0] - '0';
 	unsigned yTo = positionTo[1] - '0';
 
@@ -178,7 +173,7 @@ void Board::move(std::string& from, std::string& to, const unsigned turn)
 				}
 
 				try {
-					string kingFixedPos = Piece::breakPosition(kingPos);
+					std::string kingFixedPos = Piece::breakPosition(kingPos);
 					unsigned kingX = kingFixedPos[0] - '0';
 					unsigned kingY = kingFixedPos[1] - '0';
 					King::checkForSelfCheck(kingX, kingY, kingX, kingY, board);
@@ -216,7 +211,7 @@ void Board::move(std::string& from, std::string& to, const unsigned turn)
 			board[y][x]->move(board, from, to, false);
 
 			//getting the new location in x, y
-			string fixed = Piece::breakPosition(to);
+			std::string fixed = Piece::breakPosition(to);
 			unsigned newX = fixed[0] - '0';
 			unsigned newY = fixed[1] - '0';
 			kingPos = turn == 0 ? Piece::createPosition(Player::blackX, Player::blackY) : Piece::createPosition(Player::whiteX, Player::whiteY);

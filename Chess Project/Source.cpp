@@ -18,7 +18,7 @@ void main()
 	Pipe p;
 	bool isConnect = p.connect();
 
-	string ans;
+	std::string ans;
 	Game game;
 	while (!isConnect)
 	{
@@ -36,7 +36,7 @@ void main()
 		{
 			p.close();
 			game.giveState();
-			string move = "";
+			std::string move = "";
 			std::cin >> move;
 			std::cout << game.move(move);
 			game.giveState();
@@ -61,7 +61,7 @@ void main()
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 
 	// get message from graphics
-	string msgFromGraphics = p.getMessageFromGraphics();
+	std::string msgFromGraphics = p.getMessageFromGraphics();
 
 	while (msgFromGraphics != "quit")
 	{
@@ -85,4 +85,5 @@ void main()
 	}
 
 	p.close();
+	//std::cout << "\nleaks: " << _CrtDumpMemoryLeaks();
 }
