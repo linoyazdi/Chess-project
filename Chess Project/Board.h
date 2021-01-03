@@ -11,7 +11,7 @@
 #include "Queen.h"
 #include "Pawn.h"
 
-typedef std::vector<std::vector<Piece*>> boardMatrix;
+using boardMatrix = std::vector<std::vector<Piece*>>;
 
 class Board
 {
