@@ -57,11 +57,16 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 				}
 				else
 				{
-					if (!checkMove)
+					if (!checkMove && boardState[yTo][xTo])
 					{
 						delete boardState[yTo][xTo]; // deleting ("eating") the other piece
 						boardState[yTo][xTo] = this; // moving the king
 						boardState[y][x] = nullptr; // emptying the old place
+					}
+
+					else if (!checkMove && !boardState[yTo][xTo])
+					{
+						throw InvalidMoveToPiece();
 					}
 
 					else
@@ -104,9 +109,9 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 		}
 		else if ((x == xTo + 1 && y == yTo + 1 && this->color == 0) || (x == xTo - 1 && y == yTo + 1 && this->color == 0) || (x == xTo - 1 && y == yTo - 1 && this->color == 1) || (x == xTo + 1 && y == yTo - 1 && this->color == 1))
 		{
-			if (boardState[yTo][xTo])
+			if (boardState[yTo][xTo] || checkMove)
 			{
-				if (boardState[yTo][xTo]->getColor() == this->color)
+				if (!checkMove && boardState[yTo][xTo]->getColor() == this->color)
 				{
 					if (!checkMove)
 					{
@@ -116,12 +121,17 @@ void Pawn::move(boardMatrix& boardState, std::string& from, std::string& to, con
 				}
 				else
 				{
-					if (!checkMove)
+					if (!checkMove && boardState[yTo][xTo])
 					{
 						this->doneFirstMove = true;
 						delete boardState[yTo][xTo]; // deleting ("eating") the other piece
 						boardState[yTo][xTo] = this; // moving the king
 						boardState[y][x] = nullptr; // emptying the old place
+					}
+
+					else if (!checkMove && !boardState[yTo][xTo])
+					{
+						throw InvalidMoveToPiece();
 					}
 
 					else

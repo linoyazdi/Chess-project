@@ -215,8 +215,12 @@ void Board::move(std::string& from, std::string& to, const unsigned turn)
 			unsigned newX = fixed[0] - '0';
 			unsigned newY = fixed[1] - '0';
 			kingPos = turn == 0 ? Piece::createPosition(Player::blackX, Player::blackY) : Piece::createPosition(Player::whiteX, Player::whiteY);
+			
 			// check if the piece will cause a check on its move
-			board[newY][newX]->move(board, to, kingPos, true);
+			if (board[newY][newX])
+			{
+				board[newY][newX]->move(board, to, kingPos, true);
+			}
 		}
 		else
 		{

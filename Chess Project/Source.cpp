@@ -11,7 +11,7 @@ in order to read and write information from and to the Backend
 #include <string>
 
 
-void main()
+int main()
 {
 	srand(time_t(NULL));
 
@@ -47,7 +47,7 @@ void main()
 				std::cin >> move;
 			}
 
-			return;
+			return 0;
 		}
 	}
 
@@ -85,5 +85,6 @@ void main()
 	}
 
 	p.close();
-	//std::cout << "\nleaks: " << _CrtDumpMemoryLeaks();
+	std::cout << "\nleaks: " << _CrtDumpMemoryLeaks();
+	return 0;
 }
