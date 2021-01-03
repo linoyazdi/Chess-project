@@ -2,14 +2,12 @@
 
 unsigned Board::BOARD_SIZE = 8;
 
-Board::Board(boardMatrix board)
-{
-}
 
-Board::Board()
-{
-}
-
+/*
+This function releases the memory the object holds - the destructor
+input: none
+output: none
+*/
 Board::~Board() 
 {
 	for (unsigned i = 0; i < BOARD_SIZE; i++) {
@@ -22,40 +20,57 @@ Board::~Board()
 	}
 }
 
+
+/*
+This function returns the board
+input: none
+output: the board
+*/
 boardMatrix Board::getBoard() const
 {
 	return this->board;
 }
 
-void Board::setBoard(boardMatrix newBoard) const
-{
-}
 
-std::ostream& operator<<(std::ostream& os, Board& board)
+/*
+This function addes the board's details to the os stream
+input: the stream, the board
+output: the stream updated
+*/
+std::ostream& operator<<(std::ostream& os, const Board& board)
 {	
+	Piece* piece = nullptr;
 	for (unsigned i = 0; i < board.getBoard().size(); i++) {
 		for (unsigned j = 0; j < board.getBoard()[0].size(); j++) {
-			Piece* piece = board.getBoard()[i][j];
+			piece = board.getBoard()[i][j];
 			if (piece) {
 				os << piece->getSymbol() << " ";
 			}
 			else {
 				os << "_" << " ";
 			}
-			
 		}
 		os << std::endl;
 	}
+	
+	delete piece;
+	piece = nullptr;
+
 	return os;
 }
 
+
+/*
+This function initializes the board
+input: none
+output: none
+*/
 void Board::init() 
 {
 	for (unsigned i = 0; i < BOARD_SIZE; i++) {
 		board.push_back(std::vector<Piece*>());
 		for (unsigned j = 0; j < BOARD_SIZE; j++) {
 			board.back().push_back(nullptr);
-			//std::cout << "Added a piece";
 		}
 	}
 	board[7][4] = new King(0);
@@ -84,6 +99,12 @@ void Board::init()
 
 }
 
+
+/*
+This function converts the board to a string
+input: none
+output: the board as a string
+*/
 std::string Board::getString() const 
 {
 	std::string str = "";
@@ -100,7 +121,13 @@ std::string Board::getString() const
 	return str;
 }
 
-void Board::move(std::string from, std::string to, unsigned turn) 
+
+/*
+This function moves a piece on the boatd
+input: the position of the piece, the dest position and the turn of the player
+output: none
+*/
+void Board::move(std::string& from, std::string& to, const unsigned turn)
 {
 	string fixedPosition = Piece::breakPosition(from);
 	unsigned x = fixedPosition[0] - '0';

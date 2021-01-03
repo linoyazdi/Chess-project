@@ -10,15 +10,10 @@ in order to read and write information from and to the Backend
 #include <thread>
 #include <string>
 
-using std::cout;
-using std::endl;
-using std::string;
-
 
 void main()
 {
 	srand(time_t(NULL));
-
 
 	Pipe p;
 	bool isConnect = p.connect();
@@ -27,13 +22,13 @@ void main()
 	Game game;
 	while (!isConnect)
 	{
-		cout << "cant connect to graphics" << endl;
-		cout << "Do you try to connect again or exit? (0-try again, 1-exit)" << endl;
+		std::cout << "cant connect to graphics" << std::endl;
+		std::cout << "Do you try to connect again or exit? (0-try again, 1-exit)" << std::endl;
 		std::cin >> ans;
 
 		if (ans == "0")
 		{
-			cout << "trying connect again.." << endl;
+			std::cout << "trying connect again.." << std::endl;
 			Sleep(5000);
 			isConnect = p.connect();
 		}

@@ -8,7 +8,6 @@ output: none
 */
 Bishop::Bishop(const unsigned color) : Piece(color, color == 0 ? 'B' : 'b')
 {
-
 }
 
 
@@ -21,11 +20,11 @@ output: none
 void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
-	int x = fixedPosition[0] - '0';
-	int y = fixedPosition[1] - '0';
+	unsigned x = fixedPosition[0] - '0';
+	unsigned y = fixedPosition[1] - '0';
 	fixedPosition = Piece::breakPosition(to);
-	int xTo = fixedPosition[0] - '0';
-	int yTo = fixedPosition[1] - '0';
+	unsigned xTo = fixedPosition[0] - '0';
+	unsigned yTo = fixedPosition[1] - '0';
 
 	bool flag = true;
 
@@ -37,7 +36,7 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 	{
 		if (x > xTo && y > yTo)
 		{
-			for (int i = 0; i < x - xTo - 1; i++)
+			for (unsigned i = 0; i < x - xTo - 1; i++)
 			{
 				if (boardState[y-i-1][x-i-1])
 				{
@@ -51,7 +50,7 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 
 		if (x < xTo && y > yTo)
 		{
-			for (int i = 0; i < xTo - x - 1; i++)
+			for (unsigned i = 0; i < xTo - x - 1; i++)
 			{
 				if (boardState[y - i - 1][x + i + 1])
 				{
@@ -65,7 +64,7 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 
 		if (x < xTo && y < yTo)
 		{
-			for (int i = 0; i < xTo - x - 1; i++)
+			for (unsigned i = 0; i < xTo - x - 1; i++)
 			{
 				if (boardState[y + i + 1][x + i + 1])
 				{
@@ -79,7 +78,7 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 
 		if (x > xTo && y < yTo)
 		{
-			for (int i = 0; i < x - xTo - 1; i++)
+			for (unsigned i = 0; i < x - xTo - 1; i++)
 			{
 				if (boardState[y + i + 1][x - i - 1])
 				{

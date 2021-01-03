@@ -7,21 +7,18 @@ class Player
 private:
 	unsigned color;
 	unsigned overallScore;
-	bool inCheck;
 
 public:
 	// getters
 	unsigned getColor() const;
 	unsigned getOverallScore() const;
-	bool isInCheck() const;
 
 	// setters
-	void setColor(unsigned color);
-	void incOverallScore(unsigned value);
-	void setIsInCheck(bool flag);
+	void setColor(const unsigned color);
+	void incOverallScore(const unsigned value);
 
-	Player(unsigned color);
-	~Player() = default;
+	Player(const unsigned color); // constructor
+	~Player() = default; // destructor
 
 	static unsigned whiteX;
 	static unsigned whiteY;

@@ -14,12 +14,12 @@ protected:
 	char symbol;
 	unsigned color;
 public:
-	virtual char getSymbol() const;
-	virtual void move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove) = 0;
-	Piece(unsigned color, char symbol);
-	static string breakPosition(const string& position);
-	static string createPosition(int x, int y);
-	virtual ~Piece() = default;
-	unsigned getColor() const;
+	virtual char getSymbol() const; // getter
+	virtual void move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove) = 0; // moves the piece
+	Piece(const unsigned color, const char& symbol); // constructor
+	static string breakPosition(const string& position); // converts the position to numbers
+	static string createPosition(const int x, const int y); // converts the numbers to a position
+	virtual ~Piece() = default; // destructor
+	unsigned getColor() const; // getter
 };
 

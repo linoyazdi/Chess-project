@@ -1,7 +1,6 @@
 #include "Player.h"
 
 
-
 unsigned Player::blackX = 4;
 unsigned Player::whiteX = 4;
 unsigned Player::blackY = 0;
@@ -31,22 +30,11 @@ unsigned Player::getOverallScore() const
 
 
 /*
-This function returns if the player is on check
-input: none
-output: true if the player is on check, otherwise false
-*/
-bool Player::isInCheck() const
-{
-    return this->inCheck;
-}
-
-
-/*
 This function sets the player a new color
 input: the new color
 output: none
 */
-void Player::setColor(unsigned color)
+void Player::setColor(const unsigned color)
 {
     this->color = color;
 }
@@ -57,20 +45,9 @@ This function increases the overall score by a certian value
 input: the value to add
 output: none
 */
-void Player::incOverallScore(unsigned value)
+void Player::incOverallScore(const unsigned value)
 {
     this->overallScore += value;
-}
-
-
-/*
-This function sets if the player is on check
-input: a bool flag that represents if the player is on check
-output: none
-*/
-void Player::setIsInCheck(bool flag)
-{
-    this->inCheck = flag;
 }
 
 
@@ -79,10 +56,9 @@ This function builds a new player - the contructor
 input: the color of the game
 output: none
 */
-Player::Player(unsigned color)
+Player::Player(const unsigned color)
 {
     setColor(color);
-    this->inCheck = false;
     this->overallScore = 0;
 }
 
