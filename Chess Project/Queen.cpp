@@ -20,11 +20,11 @@ output: none
 void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, const bool checkMove)
 {
 	string fixedPosition = Piece::breakPosition(from);
-	unsigned x = fixedPosition[0] - '0';
-	unsigned y = fixedPosition[1] - '0';
+	int x = fixedPosition[0] - '0';
+	int y = fixedPosition[1] - '0';
 	fixedPosition = Piece::breakPosition(to);
-	unsigned xTo = fixedPosition[0] - '0';
-	unsigned yTo = fixedPosition[1] - '0';
+	int xTo = fixedPosition[0] - '0';
+	int yTo = fixedPosition[1] - '0';
 	bool flag = true;
 
 	if (x == xTo && y == yTo && !checkMove) {
@@ -108,7 +108,7 @@ void Queen::move(boardMatrix& boardState, std::string& from, std::string& to, co
 		{
 			for (unsigned i = 0; i < xTo - x - 1; i++)
 			{
-				if (boardState[y - i - 1][x + i + 1])
+				if (boardState[y - i - 1][x + i + (unsigned)1])
 				{
 					if (!checkMove) {
 						throw PieceAtDestPlace();

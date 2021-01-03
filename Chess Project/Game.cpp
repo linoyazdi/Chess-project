@@ -57,12 +57,6 @@ std::string Game::move(const string& move) {
 	}
 	
 	catch (Check& err) {
-		if (turn == 0) {
-			player1.setIsInCheck(true);
-		}
-		else {
-			player2.setIsInCheck(true);
-		}
 		std::cout << err.what();
 		turn = turn == 0 ? 1 : 0;
 		return "1\0";

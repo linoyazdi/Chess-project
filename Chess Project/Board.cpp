@@ -52,10 +52,7 @@ std::ostream& operator<<(std::ostream& os, const Board& board)
 		}
 		os << std::endl;
 	}
-	
-	delete piece;
 	piece = nullptr;
-
 	return os;
 }
 

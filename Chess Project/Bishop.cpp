@@ -32,7 +32,7 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 		throw SamePlace();
 	}
 
-	if (xTo - x == yTo - y || -xTo + x == yTo - y)
+	if (xTo - x == yTo - y ||  x - xTo == yTo - y)
 	{
 		if (x > xTo && y > yTo)
 		{
@@ -52,7 +52,8 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 		{
 			for (unsigned i = 0; i < xTo - x - 1; i++)
 			{
-				if (boardState[y - i - 1][x + i + 1])
+				unsigned test = x + i + 1;
+				if (boardState[y - i - 1][test])
 				{
 					if (!checkMove) {
 						throw PieceAtDestPlace();
