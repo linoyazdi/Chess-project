@@ -144,3 +144,4 @@ void Bishop::move(boardMatrix& boardState, std::string& from, std::string& to, c
 	}
 
 }
+
